@@ -5,6 +5,12 @@ namespace T_rent_api.Data;
 
 public class TrentDataContext : DbContext
 {
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Order>().ToTable("Order");
+        // Other configurations
+    }
+
     public TrentDataContext(DbContextOptions<TrentDataContext> options) : base(options)
     {
         

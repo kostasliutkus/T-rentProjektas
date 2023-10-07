@@ -1,13 +1,14 @@
 using System.Collections.Immutable;
 using Microsoft.EntityFrameworkCore;
 using T_rent_api.Data;
+using T_rent_api.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
 //Add database connection
 builder.Services.AddDbContext<TrentDataContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
-
+builder.Services.AddScoped<OrderRepository>();
 // Add services to the container.
 
 builder.Services.AddControllers();
