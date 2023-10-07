@@ -27,9 +27,33 @@ public class OrderRepository
         return order;
     }
 
-    public async Task<bool> DeleteOrderAsync(int Id)
+    public async Task<bool> UpdateOrderAsync(Order order)
     {
-        var srchResult = await _dataContext.Orders.FindAsync(Id);
+        var orderToUpdate = await _dataContext.Orders.FirstOrDefaultAsync(o => o.Id == order.Id);
+        if (orderToUpdate == null)
+        {
+            return false;
+        }
+        orderToUpdate.LeaseEndDate = order.LeaseEndDate;
+        orderToUpdate.LeaseStartDate = order.LeaseStartDate;
+        orderToUpdate.Price = order.Price;
+
+        try
+        {
+            await _dataContext.SaveChangesAsync();
+            return true;
+        }
+        catch (Exception ex)
+        {
+            throw;
+            return false;
+        }
+        
+    }
+
+    public async Task<bool> DeleteOrderAsync(int id)
+    {
+        var srchResult = await _dataContext.Orders.FindAsync(id);
         if (srchResult == null)
             return false;
         _dataContext.Orders.Remove(srchResult);

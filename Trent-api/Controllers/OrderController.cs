@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.FileProviders;
 using T_rent_api.Models;
 using T_rent_api.Repositories;
 
@@ -36,10 +37,26 @@ public class OrderController : ControllerBase
         return CreatedAtAction(nameof(GetOrder), new {id = order.Id}, order);
     }
 
-    [HttpDelete("DeleteOrder/{Id}")]
-    public async Task<IActionResult> DeleteOrder([FromBody] int Id)
+    [HttpPut("ChangeOrder/{id}")]
+    public async Task<IActionResult> ChangeOrder(int id, [FromBody] Order orderToUpdate)
     {
-        var result = await _OrderRepo.DeleteOrderAsync(Id);
+        var order = await _OrderRepo.GetOrderAsync(id);
+        orderToUpdate.Id = id;
+        
+        if (await _OrderRepo.UpdateOrderAsync(orderToUpdate))
+        {
+            return NoContent();
+        }
+        else
+        {
+            return StatusCode(500);
+        }
+    }
+
+    [HttpDelete("DeleteOrder/{id:int}")]
+    public async Task<IActionResult> DeleteOrder(int id)
+    {
+        var result = await _OrderRepo.DeleteOrderAsync(id);
         if (result == false)
         {
             return NotFound(new { message = "Order not found" });
