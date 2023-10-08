@@ -9,14 +9,11 @@ public class TrentDataContext : DbContext
     {
         modelBuilder.Entity<Order>().ToTable("Order");
         modelBuilder.Entity<Renter>().ToTable("Renter");
+        modelBuilder.Entity<Accommodation>().ToTable("Accommodation");
         // Other configurations
     }
-
-    public TrentDataContext(DbContextOptions<TrentDataContext> options) : base(options)
-    {
-        
-    }
+    public TrentDataContext(DbContextOptions<TrentDataContext> options) : base(options) { }
     public DbSet<Order> Orders { get; set; }
-    public DbSet<Accomodation> Accomodations { get; set; }
+    public DbSet<Accommodation> Accommodations { get; set; }
     public DbSet<Renter> Renters { get; set; }
 }

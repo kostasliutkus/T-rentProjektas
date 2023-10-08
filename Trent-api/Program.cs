@@ -10,6 +10,7 @@ builder.Services.AddDbContext<TrentDataContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<OrderRepository>();
 builder.Services.AddScoped<RenterRepository>();
+builder.Services.AddScoped<AccommodationRepository>();
 // Add services to the container.
 
 builder.Services.AddControllers();

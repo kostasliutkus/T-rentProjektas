@@ -7,11 +7,11 @@ namespace T_rent_api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class RetnerController : ControllerBase
+public class RenterController : ControllerBase
 {
     private readonly RenterRepository _RenterRepo;
 
-    public RetnerController(RenterRepository renterRepo)
+    public RenterController(RenterRepository renterRepo)
     {
         _RenterRepo = renterRepo;
     }

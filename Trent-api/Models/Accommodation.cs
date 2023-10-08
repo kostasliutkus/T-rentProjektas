@@ -2,7 +2,7 @@
 
 namespace T_rent_api.Models;
 
-public class Accomodation
+public class Accommodation
 {
     [Column("id")]
     public int Id { get; set; }
@@ -10,6 +10,9 @@ public class Accomodation
     [Column("location")]
     public string Location { get; set; }
     
-    [Column("instrucitons")]
+    [Column("instructions")]
     public string Instructions { get; set; }
+    
+    [Column("fk_Renter_id")]
+    public int RenterID { get; set; }
 }
