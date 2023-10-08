@@ -40,7 +40,6 @@ public class OrderController : ControllerBase
     [HttpPut("ChangeOrder/{id}")]
     public async Task<IActionResult> ChangeOrder(int id, [FromBody] Order orderToUpdate)
     {
-        var order = await _OrderRepo.GetOrderAsync(id);
         orderToUpdate.Id = id;
         
         if (await _OrderRepo.UpdateOrderAsync(orderToUpdate))

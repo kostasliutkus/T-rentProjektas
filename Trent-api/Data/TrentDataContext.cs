@@ -8,6 +8,7 @@ public class TrentDataContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Order>().ToTable("Order");
+        modelBuilder.Entity<Renter>().ToTable("Renter");
         // Other configurations
     }
 
