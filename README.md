@@ -44,7 +44,7 @@ Administratorius galės valdyti visą sistemą t. y. pridėti naujus nuomotojus 
 4. Šalinti netinkamus užsakymus.
 
 ## 3. Sistemos Architektūra
-
+![Local Image](diagram.png)
 ### Sistemos sudedamosios dalys:
 
 - Kliento pusė (ang. Front-End) – naudojant Angular, node.js;
