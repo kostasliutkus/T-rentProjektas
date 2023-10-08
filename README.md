@@ -1,5 +1,5 @@
 # T-rentProjektas
-# Sprendžiamo uždavinio aprašymas
+## Sprendžiamo uždavinio aprašymas
 
 ## 1. Sistemos paskirtis
 
