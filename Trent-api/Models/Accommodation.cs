@@ -12,7 +12,7 @@ public class Accommodation
     
     [Column("instructions")]
     public string Instructions { get; set; }
-    
+
     [Column("fk_Renter_id")]
     public int RenterID { get; set; }
 }

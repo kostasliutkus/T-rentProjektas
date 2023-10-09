@@ -6,7 +6,7 @@ using T_rent_api.Repositories;
 namespace T_rent_api.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/Accommodations")]
 public class AccommodationController : ControllerBase
 {
     private readonly AccommodationRepository _AccommodationRepo;
@@ -16,28 +16,28 @@ public class AccommodationController : ControllerBase
         _AccommodationRepo = AccommodationRepo;
     }
 
-    [HttpGet("GetAccommodations")]
-    public async Task<IActionResult> GetAccommodations()
+    [HttpGet("{id}/Renter")]
+    public async Task<IActionResult> GetAccommodations(int id)
     {
-        var accommodations = await _AccommodationRepo.GetAccommodationsAsync();
+        var accommodations = await _AccommodationRepo.GetAccommodationsAsync(id);
         return Ok(accommodations);
     }
 
-    [HttpGet("GetAccommodation/{id}")]
+    [HttpGet("{id}")]
     public async Task<IActionResult> GetAccommodation(int id)
     {
         var accommodation = await _AccommodationRepo.GetAccommodationAsync(id);
         return Ok(accommodation);
     }
 
-    [HttpPost("AddAccommodation")]
+    [HttpPost]
     public async Task<IActionResult> AddAccommodation([FromBody] Accommodation accRequest)
     {
         var accommodation = await _AccommodationRepo.AddAccommodationAsync(accRequest);
         return CreatedAtAction(nameof(GetAccommodation), new {id = accommodation.Id}, accommodation);
     }
 
-    [HttpPut("ChangeAccommodation/{id}")]
+    [HttpPut("{id}")]
     public async Task<IActionResult> ChangeAccommodation(int id, [FromBody] Accommodation accommodationToUpdate)
     {
         accommodationToUpdate.Id = id;
@@ -52,7 +52,7 @@ public class AccommodationController : ControllerBase
         }
     }
 
-    [HttpDelete("DeleteAccommodation/{id:int}")]
+    [HttpDelete("{id:int}")]
     public async Task<IActionResult> DeleteAccommodation(int id)
     {
         var result = await _AccommodationRepo.DeleteAccommodationAsync(id);

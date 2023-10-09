@@ -12,9 +12,11 @@ public class OrderRepository
     {
         _dataContext = dataContext;
     }
-    public async Task<IEnumerable<Order>> GetOrdersAsync()
+    public async Task<IEnumerable<Order>> GetOrdersAsync(int aId)
     {
-        return await _dataContext.Set<Order>().ToListAsync();
+        return await _dataContext.Set<Order>()
+            .Where(o=>o.AccommodationID == aId)
+            .ToListAsync();
     }
     public async Task<Order> GetOrderAsync(int id)
     {

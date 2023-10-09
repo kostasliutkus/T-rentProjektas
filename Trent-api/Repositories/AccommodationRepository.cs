@@ -12,9 +12,11 @@ public class AccommodationRepository
     {
         _dataContext = dataContext;
     }
-    public async Task<IEnumerable<Accommodation>> GetAccommodationsAsync()
+    public async Task<IEnumerable<Accommodation>> GetAccommodationsAsync(int rId)
     {
-        return await _dataContext.Set<Accommodation>().ToListAsync();
+        return await _dataContext.Set<Accommodation>()
+            .Where(a=> a.RenterID == rId)
+            .ToListAsync();
     }
     public async Task<Accommodation> GetAccommodationAsync(int id)
     {

@@ -19,5 +19,5 @@ public class Order
     [Column("price")]
     public decimal Price { get; set; }
     [Column("fk_accommodation_id")]
-    public decimal AccommodationID { get; set; }
+    public int AccommodationID { get; set; }
 }

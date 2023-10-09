@@ -6,7 +6,7 @@ using T_rent_api.Repositories;
 namespace T_rent_api.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/Orders")]
 public class OrderController : ControllerBase
 {
     private readonly OrderRepository _OrderRepo;
@@ -16,28 +16,28 @@ public class OrderController : ControllerBase
         _OrderRepo = OrderRepo;
     }
 
-    [HttpGet("GetOrders")]
-    public async Task<IActionResult> GetOrders()
+    [HttpGet("Accommodation/{id}/Orders")]
+    public async Task<IActionResult> GetOrders(int id)
     {
-        var orders = await _OrderRepo.GetOrdersAsync();
+        var orders = await _OrderRepo.GetOrdersAsync(id);
         return Ok(orders);
     }
 
-    [HttpGet("GetOrder/{id}")]
+    [HttpGet("{id}")]
     public async Task<IActionResult> GetOrder(int id)
     {
         var order = await _OrderRepo.GetOrderAsync(id);
         return Ok(order);
     }
 
-    [HttpPost("AddOrder")]
+    [HttpPost]
     public async Task<IActionResult> AddOrder([FromBody] Order ordRequest)
     {
         var order = await _OrderRepo.AddOrderAsync(ordRequest);
         return CreatedAtAction(nameof(GetOrder), new {id = order.Id}, order);
     }
 
-    [HttpPut("ChangeOrder/{id}")]
+    [HttpPut("{id}")]
     public async Task<IActionResult> ChangeOrder(int id, [FromBody] Order orderToUpdate)
     {
         orderToUpdate.Id = id;
@@ -52,7 +52,7 @@ public class OrderController : ControllerBase
         }
     }
 
-    [HttpDelete("DeleteOrder/{id:int}")]
+    [HttpDelete("{id:int}")]
     public async Task<IActionResult> DeleteOrder(int id)
     {
         var result = await _OrderRepo.DeleteOrderAsync(id);

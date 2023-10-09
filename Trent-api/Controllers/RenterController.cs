@@ -6,7 +6,7 @@ using T_rent_api.Repositories;
 namespace T_rent_api.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/Renters")]
 public class RenterController : ControllerBase
 {
     private readonly RenterRepository _RenterRepo;
@@ -16,28 +16,28 @@ public class RenterController : ControllerBase
         _RenterRepo = renterRepo;
     }
 
-    [HttpGet("GetRenters")]
+    [HttpGet]
     public async Task<IActionResult> GetRenters()
     {
         var renters = await _RenterRepo.GetRentersAsync();
         return Ok(renters);
     }
 
-    [HttpGet("GetRenter/{id}")]
+    [HttpGet("{id}")]
     public async Task<IActionResult> GetRenter(int id)
     {
         var renter = await _RenterRepo.GetRenterAsync(id);
         return Ok(renter);
     }
 
-    [HttpPost("AddRenter")]
+    [HttpPost]
     public async Task<IActionResult> AddRenter([FromBody] Renter renRequest)
     {
         var renter = await _RenterRepo.AddRenterAsync(renRequest);
         return CreatedAtAction(nameof(GetRenter), new {id = renter.Id}, renter);
     }
 
-    [HttpPut("ChangeRenter/{id}")]
+    [HttpPut("{id}")]
     public async Task<IActionResult> ChangeRenter(int id, [FromBody] Renter RenterToUpdate)
     {
         RenterToUpdate.Id = id;
@@ -52,7 +52,7 @@ public class RenterController : ControllerBase
         }
     }
 
-    [HttpDelete("DeleteRenter/{id:int}")]
+    [HttpDelete("{id:int}")]
     public async Task<IActionResult> DeleteRenter(int id)
     {
         var result = await _RenterRepo.DeleteRenterAsync(id);
