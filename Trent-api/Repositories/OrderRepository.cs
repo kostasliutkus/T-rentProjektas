@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using T_rent_api.Data;
 using T_rent_api.Models;
 
@@ -12,21 +13,27 @@ public class OrderRepository
     {
         _dataContext = dataContext;
     }
-    public async Task<IEnumerable<Order>> GetOrdersAsync(int aId)
+    public async Task<IEnumerable<Order>> GetOrdersAsync(int rId,int aId)
     {
         return await _dataContext.Set<Order>()
             .Where(o=>o.AccommodationID == aId)
+            .Where(o => o.RenterID == rId)
             .ToListAsync();
     }
-    public async Task<Order> GetOrderAsync(int id)
+    public async Task<Order> GetOrderAsync(int idR,int idA, int id)
     {
-        return await _dataContext.Set<Order>().FindAsync(id);
-    }
-    public async Task<Order> AddOrderAsync(Order order)
-    {
-        _dataContext.Set<Order>().Add(order);
-        await _dataContext.SaveChangesAsync();
+        var order =  await _dataContext.Set<Order>()
+            .FirstOrDefaultAsync(o => o.AccommodationID == idA && o.RenterID == idR && o.Id == id);
         return order;
+    }
+    public async Task<Order> AddOrderAsync(Order order,int idR, int idA)
+    {
+        var toAdd = order;
+        toAdd.AccommodationID = idA;
+        toAdd.RenterID = idR;
+        _dataContext.Set<Order>().Add(toAdd);
+        await _dataContext.SaveChangesAsync();
+        return toAdd;
     }
 
     public async Task<bool> UpdateOrderAsync(Order order)

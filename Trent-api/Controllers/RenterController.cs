@@ -58,7 +58,7 @@ public class RenterController : ControllerBase
         var result = await _RenterRepo.DeleteRenterAsync(id);
         if (result == false)
         {
-            return NotFound(new { message = "Renter not found" });
+            return NotFound();
         }
         return NoContent();
     }

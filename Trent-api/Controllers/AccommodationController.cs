@@ -6,7 +6,7 @@ using T_rent_api.Repositories;
 namespace T_rent_api.Controllers;
 
 [ApiController]
-[Route("api/Accommodations")]
+[Route("api/Renters/{idR}/Accommodations")]
 public class AccommodationController : ControllerBase
 {
     private readonly AccommodationRepository _AccommodationRepo;
@@ -16,25 +16,28 @@ public class AccommodationController : ControllerBase
         _AccommodationRepo = AccommodationRepo;
     }
 
-    [HttpGet("{id}/Renter")]
-    public async Task<IActionResult> GetAccommodations(int id)
+    [HttpGet]
+    public async Task<IActionResult> GetAccommodations(int idR)
     {
-        var accommodations = await _AccommodationRepo.GetAccommodationsAsync(id);
+        var accommodations = await _AccommodationRepo.GetAccommodationsAsync(idR);
         return Ok(accommodations);
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetAccommodation(int id)
+    public async Task<IActionResult> GetAccommodation(int id,int idR)
     {
-        var accommodation = await _AccommodationRepo.GetAccommodationAsync(id);
-        return Ok(accommodation);
+            var accommodation = await _AccommodationRepo.GetAccommodationAsync(id,idR);
+            if (accommodation == null)
+                return NotFound();
+            return Ok(accommodation); 
     }
 
     [HttpPost]
-    public async Task<IActionResult> AddAccommodation([FromBody] Accommodation accRequest)
+    public async Task<IActionResult> AddAccommodation([FromBody] Accommodation accRequest,int idR)
     {
-        var accommodation = await _AccommodationRepo.AddAccommodationAsync(accRequest);
-        return CreatedAtAction(nameof(GetAccommodation), new {id = accommodation.Id}, accommodation);
+        var accommodation = await _AccommodationRepo.AddAccommodationAsync(accRequest,idR);
+        accommodation.RenterID = idR;
+        return Ok(accommodation);
     }
 
     [HttpPut("{id}")]

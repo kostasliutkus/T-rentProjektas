@@ -20,4 +20,6 @@ public class Order
     public decimal Price { get; set; }
     [Column("fk_accommodation_id")]
     public int AccommodationID { get; set; }
+    [Column("fk_renter_id")]
+    public int RenterID { get; set; }
 }

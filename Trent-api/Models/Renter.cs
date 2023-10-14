@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace T_rent_api.Models;
 
@@ -17,6 +18,7 @@ public class Renter
     public int age { get; set; }
     
     [Column("Id")]
+    [Key]
     public int Id { get; set; }
     
     [Column("email")]

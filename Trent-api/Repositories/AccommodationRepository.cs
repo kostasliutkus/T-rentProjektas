@@ -12,21 +12,25 @@ public class AccommodationRepository
     {
         _dataContext = dataContext;
     }
-    public async Task<IEnumerable<Accommodation>> GetAccommodationsAsync(int rId)
+    public async Task<IEnumerable<Accommodation>> GetAccommodationsAsync(int idR)
     {
         return await _dataContext.Set<Accommodation>()
-            .Where(a=> a.RenterID == rId)
+            .Where(a=> a.RenterID == idR)
             .ToListAsync();
     }
-    public async Task<Accommodation> GetAccommodationAsync(int id)
+    public async Task<Accommodation> GetAccommodationAsync(int id,int idR)
     {
-        return await _dataContext.Set<Accommodation>().FindAsync(id);
-    }
-    public async Task<Accommodation> AddAccommodationAsync(Accommodation accommodation)
-    {
-        _dataContext.Set<Accommodation>().Add(accommodation);
-        await _dataContext.SaveChangesAsync();
+        var accommodation = await _dataContext.Set<Accommodation>()
+            .FirstOrDefaultAsync(a => a.RenterID == idR && a.Id == id);
         return accommodation;
+    }
+    public async Task<Accommodation> AddAccommodationAsync(Accommodation accommodation,int idR)
+    {
+        var toAdd = accommodation;
+        accommodation.RenterID = idR;
+        _dataContext.Set<Accommodation>().Add(toAdd);
+        await _dataContext.SaveChangesAsync();
+        return toAdd;
     }
 
     public async Task<bool> UpdateAccommodationAsync(Accommodation accommodation)
