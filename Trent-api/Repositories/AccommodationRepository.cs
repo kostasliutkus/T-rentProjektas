@@ -33,9 +33,9 @@ public class AccommodationRepository
         return toAdd;
     }
 
-    public async Task<bool> UpdateAccommodationAsync(Accommodation accommodation)
+    public async Task<bool> UpdateAccommodationAsync(Accommodation accommodation,int idR)
     {
-        var AccommodationToUpdate = await _dataContext.Accommodations.FirstOrDefaultAsync(o => o.Id == accommodation.Id);
+        var AccommodationToUpdate = await _dataContext.Accommodations.FirstOrDefaultAsync(o => o.Id == accommodation.Id && o.RenterID ==idR);
         if (AccommodationToUpdate == null)
         {
             return false;
@@ -55,9 +55,9 @@ public class AccommodationRepository
         }
         
     }
-    public async Task<bool> DeleteAccommodationAsync(int id)
+    public async Task<bool> DeleteAccommodationAsync(int id,int idR)
     {
-        var srchResult = await _dataContext.Accommodations.FindAsync(id);
+        var srchResult = await _dataContext.Accommodations.FirstOrDefaultAsync(a=>a.Id==id && a.RenterID == idR);
         if (srchResult == null)
             return false;
         _dataContext.Accommodations.Remove(srchResult);

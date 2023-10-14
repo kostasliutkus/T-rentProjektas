@@ -20,6 +20,8 @@ public class OrderController : ControllerBase
     public async Task<IActionResult> GetOrders(int idR, int idA)
     {
         var orders = await _OrderRepo.GetOrdersAsync(idR,idA);
+        if (orders == null)
+            return StatusCode(500);
         return Ok(orders);
     }
 
@@ -38,16 +40,20 @@ public class OrderController : ControllerBase
     public async Task<IActionResult> AddOrder([FromBody] Order ordRequest,int idR,int idA)
     {
         var order = await _OrderRepo.AddOrderAsync(ordRequest,idR,idA);
+        if (order == null)
+        {
+            return StatusCode(400);
+        }
         order.RenterID = idR;
         order.AccommodationID = idA;
         return Ok(order);
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> ChangeOrder(int id, [FromBody] Order orderToUpdate)
+    public async Task<IActionResult> ChangeOrder(int id, [FromBody] Order orderToUpdate,int idR,int idA)
     {
         orderToUpdate.Id = id;
-        if (await _OrderRepo.UpdateOrderAsync(orderToUpdate))
+        if (await _OrderRepo.UpdateOrderAsync(orderToUpdate,idR,idA))
         {
             return NoContent();
         }
@@ -58,9 +64,9 @@ public class OrderController : ControllerBase
     }
 
     [HttpDelete("{id:int}")]
-    public async Task<IActionResult> DeleteOrder(int id)
+    public async Task<IActionResult> DeleteOrder(int id,int idR,int idA)
     {
-        var result = await _OrderRepo.DeleteOrderAsync(id);
+        var result = await _OrderRepo.DeleteOrderAsync(id,idR,idA);
         if (result == false)
         {
             return NotFound(new { message = "Order not found" });

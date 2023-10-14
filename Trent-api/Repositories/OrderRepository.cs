@@ -36,9 +36,9 @@ public class OrderRepository
         return toAdd;
     }
 
-    public async Task<bool> UpdateOrderAsync(Order order)
+    public async Task<bool> UpdateOrderAsync(Order order,int idR, int idA)
     {
-        var orderToUpdate = await _dataContext.Orders.FirstOrDefaultAsync(o => o.Id == order.Id);
+        var orderToUpdate = await _dataContext.Orders.FirstOrDefaultAsync(o => o.Id == order.Id && o.AccommodationID ==idA && o.RenterID ==idR);
         if (orderToUpdate == null)
         {
             return false;
@@ -60,9 +60,9 @@ public class OrderRepository
         
     }
 
-    public async Task<bool> DeleteOrderAsync(int id)
+    public async Task<bool> DeleteOrderAsync(int id,int idR,int idA)
     {
-        var srchResult = await _dataContext.Orders.FindAsync(id);
+        var srchResult = await _dataContext.Orders.FirstOrDefaultAsync(o=>o.Id ==id && o.AccommodationID == idA && o.RenterID == idR);
         if (srchResult == null)
             return false;
         _dataContext.Orders.Remove(srchResult);

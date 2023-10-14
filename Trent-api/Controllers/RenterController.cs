@@ -20,6 +20,8 @@ public class RenterController : ControllerBase
     public async Task<IActionResult> GetRenters()
     {
         var renters = await _RenterRepo.GetRentersAsync();
+        if (renters == null)
+            return StatusCode(500);
         return Ok(renters);
     }
 
@@ -27,6 +29,8 @@ public class RenterController : ControllerBase
     public async Task<IActionResult> GetRenter(int id)
     {
         var renter = await _RenterRepo.GetRenterAsync(id);
+        if (renter == null)
+            return NotFound();
         return Ok(renter);
     }
 
@@ -34,7 +38,11 @@ public class RenterController : ControllerBase
     public async Task<IActionResult> AddRenter([FromBody] Renter renRequest)
     {
         var renter = await _RenterRepo.AddRenterAsync(renRequest);
-        return CreatedAtAction(nameof(GetRenter), new {id = renter.Id}, renter);
+        if (renter == null)
+        {
+            return StatusCode(400);
+        }
+        return Ok(renter);
     }
 
     [HttpPut("{id}")]
