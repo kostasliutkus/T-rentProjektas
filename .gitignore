@@ -1,0 +1,16 @@
+# IDE/Editor
+.idea/
+.vscode/
+*.sln.iml
+*.ipr
+*.iws
+*/.idea/
+
+# Logs
+*.log
+
+# JetBrains Rider files
+.idea/
+*.sln.iml
+*.ipr
+*.iws
