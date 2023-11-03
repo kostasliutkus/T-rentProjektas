@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:postgresql://localhost:5432/SaitynoDB</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="postgres@Google Cloud SQL" uuid="6c9929ec-7310-46cf-a6b8-0c13d9dce882">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://34.39.2.141:5432/postgres</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>
