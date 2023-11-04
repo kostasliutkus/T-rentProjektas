@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using T_rent_api.Auth.Model;
 
 namespace T_rent_api.Models;
 
@@ -26,4 +27,7 @@ public class Renter
     
     [Column("phone")]
     public string Phone{ get; set; }
+    [Required]
+    public string UserId { get; set; }
+    public TrentRestUser User { get; set; }
 }

@@ -82,3 +82,9 @@ C:\Users\Kostas Liutkus\Desktop\SaitynoProjektas\T-rentProjektas\Trent-api\obj\D
 C:\Users\Kostas Liutkus\Desktop\SaitynoProjektas\T-rentProjektas\Trent-api\obj\Debug\net6.0\ref\T-rent-api.dll
 C:\Users\Kostas Liutkus\Desktop\SaitynoProjektas\T-rentProjektas\Trent-api\obj\Debug\net6.0\T-rent-api.pdb
 C:\Users\Kostas Liutkus\Desktop\SaitynoProjektas\T-rentProjektas\Trent-api\obj\Debug\net6.0\T-rent-api.genruntimeconfig.cache
+C:\Users\Kostas Liutkus\Desktop\SaitynoProjektas\T-rentProjektas\Trent-api\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Kostas Liutkus\Desktop\SaitynoProjektas\T-rentProjektas\Trent-api\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\Kostas Liutkus\Desktop\SaitynoProjektas\T-rentProjektas\Trent-api\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\Kostas Liutkus\Desktop\SaitynoProjektas\T-rentProjektas\Trent-api\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\Kostas Liutkus\Desktop\SaitynoProjektas\T-rentProjektas\Trent-api\bin\Debug\net6.0\Microsoft.Extensions.Identity.Core.dll
+C:\Users\Kostas Liutkus\Desktop\SaitynoProjektas\T-rentProjektas\Trent-api\bin\Debug\net6.0\Microsoft.Extensions.Identity.Stores.dll

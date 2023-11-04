@@ -1,12 +1,15 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using T_rent_api.Auth.Model;
 using T_rent_api.Models;
 
 namespace T_rent_api.Data;
 
-public class TrentDataContext : DbContext
+public class TrentDataContext : IdentityDbContext<TrentRestUser>
 {
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
         modelBuilder.Entity<Order>().ToTable("Order");
         modelBuilder.Entity<Renter>().ToTable("Renter");
         modelBuilder.Entity<Accommodation>().ToTable("Accommodation");
