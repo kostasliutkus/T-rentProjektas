@@ -30,7 +30,7 @@ public class AuthDbSeeder
         var existingAdminUser = await _userManager.FindByNameAsync(newAdminUser.UserName);
         if (existingAdminUser == null)
         {
-            var createAdminUserResult = await _userManager.CreateAsync(newAdminUser, "VerySafePassword!");
+            var createAdminUserResult = await _userManager.CreateAsync(newAdminUser, "VerySafePassword1!");
             if (createAdminUserResult.Succeeded)
             {
                 await _userManager.AddToRolesAsync(newAdminUser, TrentRoles.All);

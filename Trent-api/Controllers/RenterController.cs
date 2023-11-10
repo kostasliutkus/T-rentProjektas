@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.FileProviders;
 using T_rent_api.Auth.Model;
@@ -13,10 +15,12 @@ namespace T_rent_api.Controllers;
 public class RenterController : ControllerBase
 {
     private readonly RenterRepository _RenterRepo;
+    private readonly IAuthorizationService _authorizationService;
 
-    public RenterController(RenterRepository renterRepo)
+    public RenterController(RenterRepository renterRepo,IAuthorizationService authorizationService)
     {
         _RenterRepo = renterRepo;
+        _authorizationService = authorizationService;
     }
 
     [HttpGet]
@@ -42,10 +46,13 @@ public class RenterController : ControllerBase
     public async Task<IActionResult> AddRenter([FromBody] Renter renRequest)
     {
         var renter = await _RenterRepo.AddRenterAsync(renRequest);
+        
         if (renter == null)
         {
             return StatusCode(400);
         }
+        var userId = User.FindFirstValue(JwtRegisteredClaimNames.Sub);
+        renter.UserId = userId;
         return Ok(renter);
     }
 
@@ -55,14 +62,18 @@ public class RenterController : ControllerBase
     {
         RenterToUpdate.Id = id;
         
+        var authorizationResult = await _authorizationService.AuthorizeAsync(User, RenterToUpdate, PolicyNames.ResourceOwner);
+        if (!authorizationResult.Succeeded)
+        {
+            //404
+            //return NotFound();
+            return Forbid();
+        }
         if (await _RenterRepo.UpdateRenterAsync(RenterToUpdate))
         {
             return NoContent();
         }
-        else
-        {
-            return StatusCode(500);
-        }
+        return StatusCode(500);
     }
 
     [HttpDelete("{id:int}")]

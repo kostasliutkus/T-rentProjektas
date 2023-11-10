@@ -56,8 +56,8 @@ public class AuthController : ControllerBase
         //valid user
         //(generate token)
         var roles = await _userManager.GetRolesAsync(user);
-        foreach(var role in roles)
-            Console.WriteLine(role);
+        /*foreach(var role in roles)
+            Console.WriteLine(role);*/
         var accessToken = _jwtTokenService.CreateAccessToken(user.UserName, user.Id, roles);
         
         return Ok(new SuccessfulLoginDto(accessToken));

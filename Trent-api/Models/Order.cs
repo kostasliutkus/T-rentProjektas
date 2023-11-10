@@ -1,8 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using T_rent_api.Auth.Model;
 
 namespace T_rent_api.Models;
 
-public class Order
+public class Order : IUserOwnedResource
 {
     [Column("id")]
     public int Id { get; set; }
@@ -22,4 +24,7 @@ public class Order
     public int AccommodationID { get; set; }
     [Column("fk_renter_id")]
     public int RenterID { get; set; }
+    [Required]
+    public string UserId { get; set; }
+    public TrentRestUser User { get; set; }
 }

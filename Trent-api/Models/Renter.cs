@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 using T_rent_api.Auth.Model;
 
 namespace T_rent_api.Models;
 
-public class Renter
+public class Renter : IUserOwnedResource
 {
     [Column("first_name")]
     public string FirstName { get; set; }
@@ -27,7 +28,9 @@ public class Renter
     
     [Column("phone")]
     public string Phone{ get; set; }
-    [Required]
+    
+    [Required,JsonIgnore]
     public string UserId { get; set; }
-    public TrentRestUser User { get; set; }
+    //[JsonIgnore]
+    //public TrentRestUser User { get; set; }
 }
