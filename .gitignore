@@ -1,20 +1,24 @@
-# IDE/Editor
-.idea/
-.vscode/
-*.sln.iml
-*.ipr
-*.iws
-*/.idea/
-
-# Logs
-*.log
-
-# JetBrains Rider files
-.idea/
-*.sln.iml
-*.ipr
-*.iws
-# connection data
+obj
+bin
+_ReSharper.*
+*.csproj.user
+*.resharper.user
+*.resharper
+*.dotCover
+builds
+Sources/packages
+*.suo
+*.user
+*.cache
+*.ncrunchsolution
+*.ncrunchproject
+*.dll
+*.pdb
+*_NCrunch_*
+*.DotSettings
+.project
+.vs
+.publish
+.idea
 appsettings.json
-
-.fake
+.vscode
