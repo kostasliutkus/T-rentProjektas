@@ -17,14 +17,10 @@ var builder = WebApplication.CreateBuilder(args);
 JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 builder.Services.AddControllers();
 
-
-
 //Add authentication
 builder.Services.AddIdentity<TrentRestUser, IdentityRole>()
     .AddEntityFrameworkStores<TrentDataContext>()
     .AddDefaultTokenProviders();
-
-
 
 builder.Services.AddAuthentication(opt =>
     {
@@ -41,7 +37,7 @@ builder.Services.AddAuthentication(opt =>
     });
 //Add database connection
 builder.Services.AddDbContext<TrentDataContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("LocalConnection")));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DigitalOceanDBConnection")));
 
 builder.Services.AddScoped<OrderRepository>();
 builder.Services.AddScoped<AccommodationRepository>();
