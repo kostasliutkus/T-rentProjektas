@@ -45,15 +45,24 @@ public class RenterController : ControllerBase
     [Authorize(Roles = TrentRoles.TrentUser)]
     public async Task<IActionResult> AddRenter([FromBody] Renter renRequest)
     {
-        var renter = await _RenterRepo.AddRenterAsync(renRequest);
-        
-        if (renter == null)
+        var renter = new Renter
         {
-            return StatusCode(400);
-        }
-        var userId = User.FindFirstValue(JwtRegisteredClaimNames.Sub);
-        renter.UserId = userId;
-        return Ok(renter);
+            FirstName = renRequest.FirstName,
+            LastName = renRequest.LastName,
+            Organization = renRequest.Organization,
+            age = renRequest.age,
+            Email = renRequest.Email,
+            Phone = renRequest.Phone,
+            UserId =User.FindFirstValue(JwtRegisteredClaimNames.Sub)
+        };
+        //var userId = User.FindFirstValue(JwtRegisteredClaimNames.Sub);
+        //renter = renRequest.userId;
+        // if (renRequest == null)
+        // {
+        //     return StatusCode(400);
+        // }
+        await _RenterRepo.AddRenterAsync(renter);
+        return Ok(renRequest);
     }
 
     [HttpPut("{id}")]

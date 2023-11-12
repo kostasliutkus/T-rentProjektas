@@ -29,8 +29,7 @@ public class Renter : IUserOwnedResource
     [Column("phone")]
     public string Phone{ get; set; }
     
-    [Required,JsonIgnore]
+    [Required]
     public string UserId { get; set; }
-    //[JsonIgnore]
-    //public TrentRestUser User { get; set; }
+    public TrentRestUser User { get; set; }
 }

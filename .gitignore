@@ -16,3 +16,5 @@
 *.iws
 # connection data
 appsettings.json
+
+.fake

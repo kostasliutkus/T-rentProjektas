@@ -23,6 +23,7 @@ public class AuthDbSeeder
     {
         var newAdminUser = new TrentRestUser()
         {
+            Discriminator = "administrator",
             UserName = "admin",
             Email = "admin@gmail.com"
         };

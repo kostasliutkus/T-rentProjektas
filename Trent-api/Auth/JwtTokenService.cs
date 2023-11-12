@@ -33,8 +33,7 @@ public class JwtTokenService : IJwtTokenService
             new(JwtRegisteredClaimNames.Sub, userId)
         };
         authClaims.AddRange(userRoles.Select(userRole => new Claim(ClaimTypes.Role,userRole)));
-        foreach (var role in userRoles)
-            Console.WriteLine(role);
+
         var accessSecurityToken = new JwtSecurityToken
         (
             issuer: _issuer,

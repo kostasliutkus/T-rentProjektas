@@ -22,16 +22,15 @@ public class AuthController : ControllerBase
     [Route("register")]
     public async Task<IActionResult> Register(RegisterUserDto registerUserDto)
     {
-        
         var user = await _userManager.FindByNameAsync(registerUserDto.UserName);
         if (user != null)
             return BadRequest("User already exists.");
         
         var newUser = new TrentRestUser
         {
-            Discriminator = "registeredUser",
             Email = registerUserDto.Email,
-            UserName = registerUserDto.UserName
+            UserName = registerUserDto.UserName,
+            Discriminator = "default"
         };
         
         var createUserResult = await _userManager.CreateAsync(newUser, registerUserDto.Password);
@@ -56,8 +55,7 @@ public class AuthController : ControllerBase
         //valid user
         //(generate token)
         var roles = await _userManager.GetRolesAsync(user);
-        /*foreach(var role in roles)
-            Console.WriteLine(role);*/
+
         var accessToken = _jwtTokenService.CreateAccessToken(user.UserName, user.Id, roles);
         
         return Ok(new SuccessfulLoginDto(accessToken));

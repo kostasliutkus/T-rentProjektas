@@ -11,6 +11,7 @@ using T_rent_api.Auth.Model;
 using T_rent_api.Data;
 using T_rent_api.Repositories;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
@@ -72,19 +73,20 @@ builder.Services.AddSingleton<IAuthorizationHandler, ResourceOwnerAuthorizationH
 
 var app = builder.Build();
 
-//add database context
-using (var scope = app.Services.CreateScope())
-{
-    var dataContext = scope.ServiceProvider.GetRequiredService<TrentDataContext>();
-    dataContext.Database.Migrate();
-}
+
 
 //app.UseHttpsRedirection();
 app.UseRouting();
 app.MapControllers();
 app.UseAuthentication();
 app.UseAuthorization();
+//add database context
+using (var scope = app.Services.CreateScope())
+{
+    var dataContext = scope.ServiceProvider.GetRequiredService<TrentDataContext>();
+    dataContext.Database.Migrate();
+    var dbSeeder = scope.ServiceProvider.GetRequiredService<AuthDbSeeder>();
+    await dbSeeder.SeedAsync();
+}
 
-var dbSeeder = app.Services.CreateScope().ServiceProvider.GetRequiredService<AuthDbSeeder>();
-await dbSeeder.SeedAsync();
 app.Run();

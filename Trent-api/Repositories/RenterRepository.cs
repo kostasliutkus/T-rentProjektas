@@ -47,10 +47,9 @@ public class RenterRepository
             await _dataContext.SaveChangesAsync();
             return true;
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             throw;
-            return false;
         }
         
     }
