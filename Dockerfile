@@ -2,7 +2,7 @@
 
 # copy csproj and restore as distinct layers
 COPY Trent-api/*.csproj .
-RUN dotnet restore -a $TARGETARCH
+RUN dotnet restore
 
 # copy and publish app and libraries
 COPY Trent-api/. .
