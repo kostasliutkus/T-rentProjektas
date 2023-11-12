@@ -1,13 +1,13 @@
 # https://hub.docker.com/_/microsoft-dotnet
 FROM mcr.microsoft.com/dotnet/sdk:6.0-alpine AS build
-WORKDIR /TrentAPI
+WORKDIR /source
 
 # copy csproj and restore as distinct layers
-COPY TrentAPI/*.csproj .
+COPY source/TrentAPI/*.csproj .
 RUN dotnet restore -r linux-musl-x64 /p:PublishReadyToRun=true
 
 # copy everything else and build app
-COPY TrentAPI/. .
+COPY source/TrentAPI/. .
 RUN dotnet publish -c Release -o /app -r linux-musl-x64 --self-contained true --no-restore /p:PublishReadyToRun=true /p:PublishSingleFile=true
 
 # final stage/image
