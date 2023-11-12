@@ -6,8 +6,8 @@ ENV ASPNETCORE_URLS=http://+:8010
 EXPOSE 8010
 
 # copy csproj and restore as distinct layers
-COPY *.sln .
-COPY TrentAPI/*.*.csproj ./TrentAPI/
+COPY TrentAPI/*.sln .
+COPY TrentAPI/*.csproj ./TrentAPI/
 
 # copy everything else and build app
 COPY TrentAPI/. ./TrentAPI/
