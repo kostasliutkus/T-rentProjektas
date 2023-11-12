@@ -21,6 +21,6 @@ RUN dotnet publish -c Release -o /app/out
 # Stage 2: Deploy
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
-COPY --from=build /app/out .
+COPY --from=build /app .
 
-ENTRYPOINT ["dotnet", "TrentAPI.dll"]
+ENTRYPOINT ["./TrentAPI"]
