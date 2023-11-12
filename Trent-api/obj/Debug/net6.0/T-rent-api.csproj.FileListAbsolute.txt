@@ -88,3 +88,4 @@ C:\Users\Kostas Liutkus\Desktop\SaitynoProjektas\T-rentProjektas\Trent-api\obj\D
 C:\Users\Kostas Liutkus\Desktop\SaitynoProjektas\T-rentProjektas\Trent-api\obj\Debug\net6.0\ref\T-rent-api.dll
 C:\Users\Kostas Liutkus\Desktop\SaitynoProjektas\T-rentProjektas\Trent-api\obj\Debug\net6.0\T-rent-api.pdb
 C:\Users\Kostas Liutkus\Desktop\SaitynoProjektas\T-rentProjektas\Trent-api\obj\Debug\net6.0\T-rent-api.genruntimeconfig.cache
+C:\Users\Kostas Liutkus\Desktop\SaitynoProjektas\T-rentProjektas\Trent-api\bin\Debug\net6.0\FluentValidation.dll

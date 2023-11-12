@@ -17,7 +17,7 @@ public class Renter : IUserOwnedResource
     public string Organization{ get; set; }
     
     [Column("age")]
-    public int age { get; set; }
+    public int Age { get; set; }
     
     [Column("Id")]
     [Key]

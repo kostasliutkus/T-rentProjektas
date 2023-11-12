@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "noDOmrZc6A84ZcPxlrV9Q293do5iOki4NN0Xe8Dh0WzZQZd0xdCppS5YloGXA+Z1gndnffryBuQwjoq6L99knQ==",
+  "dgSpecHash": "63SgESqkdRewHIZVzZlfCd0IhHLd/RIJ3Mk99ELQXpX1naA9u9ILp5PrXlLf7fPR7vudV61SHKSZzQLb8evpVA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Kostas Liutkus\\Desktop\\SaitynoProjektas\\T-rentProjektas\\Trent-api\\T-rent-api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Kostas Liutkus\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\Kostas Liutkus\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
+    "C:\\Users\\Kostas Liutkus\\.nuget\\packages\\fluentvalidation\\11.8.0\\fluentvalidation.11.8.0.nupkg.sha512",
     "C:\\Users\\Kostas Liutkus\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Kostas Liutkus\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.2.0\\microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",
     "C:\\Users\\Kostas Liutkus\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",

@@ -1,5 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.FileProviders;
+using T_rent_api.Auth.Model;
+using T_rent_api.Dtos.Orders;
 using T_rent_api.Models;
 using T_rent_api.Repositories;
 
@@ -9,26 +14,30 @@ namespace T_rent_api.Controllers;
 [Route("api/Renters/{idR}/Accommodations/{idA}/Orders")]
 public class OrderController : ControllerBase
 {
-    private readonly OrderRepository _OrderRepo;
+    private readonly OrderRepository _orderRepo;
+    private readonly IAuthorizationService _authorizationService;
 
-    public OrderController(OrderRepository OrderRepo)
+    public OrderController(OrderRepository orderRepo,IAuthorizationService authorizationService)
     {
-        _OrderRepo = OrderRepo;
+        _orderRepo = orderRepo;
+        _authorizationService=authorizationService;
     }
 
     [HttpGet]
+    [Authorize(Roles = TrentRoles.TrentUser)]
     public async Task<IActionResult> GetOrders(int idR, int idA)
     {
-        var orders = await _OrderRepo.GetOrdersAsync(idR,idA);
+        var orders = await _orderRepo.GetOrdersAsync(idR,idA);
         if (orders == null)
             return StatusCode(500);
         return Ok(orders);
     }
 
     [HttpGet("{id}")]
+    [Authorize(Roles = TrentRoles.TrentUser)]
     public async Task<IActionResult> GetOrder(int idR, int idA,int id)
     {
-        var order = await _OrderRepo.GetOrderAsync(idR,idA,id);
+        var order = await _orderRepo.GetOrderAsync(idR,idA,id);
         if (order == null)
         {
             return NotFound();
@@ -37,40 +46,89 @@ public class OrderController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> AddOrder([FromBody] Order ordRequest,int idR,int idA)
+    [Authorize(Roles = TrentRoles.TrentUser)]
+    public async Task<IActionResult> AddOrder(CreateOrderDto ordRequest,int idR,int idA)
     {
-        var order = await _OrderRepo.AddOrderAsync(ordRequest,idR,idA);
-        if (order == null)
+        if (ordRequest == null)
         {
             return StatusCode(400);
         }
-        order.RenterID = idR;
-        order.AccommodationID = idA;
-        return Ok(order);
+        var order = new Order
+        {
+            RenterID=idR,
+            AccommodationID=idA,
+            CreationDate = DateTime.UtcNow,
+            LeaseStartDate = ordRequest.LeaseStartDate,
+            LeaseEndDate = ordRequest.LeaseEndDate,
+            Price = ordRequest.Price,
+            UserId =User.FindFirstValue(JwtRegisteredClaimNames.Sub)
+        };
+         
+        await _orderRepo.AddOrderAsync(order,idR,idA);
+        return Created("",
+            new OrderDto(order.Id, order.CreationDate, order.LeaseStartDate, order.LeaseEndDate, order.Price, order.AccommodationID,
+                order.RenterID));
+        // var order = await _orderRepo.AddOrderAsync(ordRequest,idR,idA);
+        // if (order == null)
+        // {
+        //     return StatusCode(400);
+        // }
+        // order.RenterID = idR;
+        // order.AccommodationID = idA;
+        // return Ok(order);
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> ChangeOrder(int id, [FromBody] Order orderToUpdate,int idR,int idA)
+    [Authorize(Roles = TrentRoles.TrentUser)]
+    public async Task<IActionResult> ChangeOrder(int id, UpdateOrderDto orderToUpdate,int idR,int idA)
     {
-        orderToUpdate.Id = id;
-        if (await _OrderRepo.UpdateOrderAsync(orderToUpdate,idR,idA))
+        var order = await _orderRepo.GetOrderAsync(idR, idA, id);
+        if (order == null)
+            return NotFound();
+        
+        var authorizationResult = await _authorizationService.AuthorizeAsync(User, order, PolicyNames.ResourceOwner);
+        if (!authorizationResult.Succeeded)
         {
-            return NoContent();
+            //404
+            //return NotFound();
+            return Forbid();
         }
-        else
-        {
-            return StatusCode(500);
-        }
+        order.LeaseEndDate = orderToUpdate.LeaseEndDate;
+        order.LeaseStartDate = orderToUpdate.LeaseStartDate;
+        order.Price = orderToUpdate.Price;
+
+        await _orderRepo.UpdateOrderAsync(order, idR, idA);
+        
+        return Ok(new OrderDto(order.Id,order.CreationDate,order.LeaseStartDate,order.LeaseEndDate,order.Price,order.AccommodationID,order.RenterID));
+        // orderToUpdate.Id = id;
+        // if (await _orderRepo.UpdateOrderAsync(orderToUpdate,idR,idA))
+        // {
+        //     return NoContent();
+        // }
+        // else
+        // {
+        //     return StatusCode(500);
+        // }
     }
 
     [HttpDelete("{id:int}")]
+    [Authorize(Roles = TrentRoles.TrentUser)]
     public async Task<IActionResult> DeleteOrder(int id,int idR,int idA)
     {
-        var result = await _OrderRepo.DeleteOrderAsync(id,idR,idA);
-        if (result == false)
+        var result = await _orderRepo.GetOrderAsync(idR,idA,id);
+        if (result == null)
         {
             return NotFound(new { message = "Order not found" });
         }
+        var authorizationResult = await _authorizationService.AuthorizeAsync(User, result, PolicyNames.ResourceOwner);
+        if (!authorizationResult.Succeeded)
+        {
+            //404
+            //return NotFound();
+            return Forbid();
+        }
+
+        await _orderRepo.DeleteOrderAsync(id,idR,idA);
         return NoContent();
     }
 }

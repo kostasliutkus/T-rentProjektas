@@ -27,31 +27,10 @@ public class RenterRepository
         return renter;
     }
 
-    public async Task<bool> UpdateRenterAsync(Renter renter)
+    public async Task UpdateRenterAsync(Renter renter)
     {
-        var renterToUpdate = await _dataContext.Renters.FirstOrDefaultAsync(o => o.Id == renter.Id);
-        if (renterToUpdate == null)
-        {
-            return false;
-        }   
-        //here assign changes
-        renterToUpdate.FirstName = renter.FirstName;
-        renterToUpdate.LastName = renter.LastName;
-        renterToUpdate.Organization = renter.Organization;
-        renterToUpdate.age = renter.age;
-        renterToUpdate.Email = renter.Email;
-        renterToUpdate.Phone = renter.Phone;
-        
-        try
-        {
-            await _dataContext.SaveChangesAsync();
-            return true;
-        }
-        catch (Exception)
-        {
-            throw;
-        }
-        
+        _dataContext.Renters.Update(renter);
+        await _dataContext.SaveChangesAsync();
     }
     public async Task<bool> DeleteRenterAsync(int id)
     {

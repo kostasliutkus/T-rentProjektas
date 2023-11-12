@@ -33,25 +33,27 @@ public class AccommodationRepository
         return toAdd;
     }
 
-    public async Task<bool> UpdateAccommodationAsync(Accommodation accommodation,int idR)
+    public async Task UpdateAccommodationAsync(Accommodation accommodation,int idR)
     {
-        var AccommodationToUpdate = await _dataContext.Accommodations.FirstOrDefaultAsync(o => o.Id == accommodation.Id && o.RenterID ==idR);
-        if (AccommodationToUpdate == null)
-        {
-            return false;
-        }   
-        //here assign changes
-        AccommodationToUpdate.Location = accommodation.Location;
-        AccommodationToUpdate.Instructions = accommodation.Instructions;
-        try
-        {
-            await _dataContext.SaveChangesAsync();
-            return true;
-        }
-        catch (Exception)
-        {
-            throw;
-        }
+        _dataContext.Accommodations.Update(accommodation);
+        await _dataContext.SaveChangesAsync();
+        // var AccommodationToUpdate = await _dataContext.Accommodations.FirstOrDefaultAsync(o => o.Id == accommodation.Id && o.RenterID ==idR);
+        // if (AccommodationToUpdate == null)
+        // {
+        //     return false;
+        // }   
+        // //here assign changes
+        // AccommodationToUpdate.Location = accommodation.Location;
+        // AccommodationToUpdate.Instructions = accommodation.Instructions;
+        // try
+        // {
+        //     await _dataContext.SaveChangesAsync();
+        //     return true;
+        // }
+        // catch (Exception)
+        // {
+        //     throw;
+        // }
         
     }
     public async Task<bool> DeleteAccommodationAsync(int id,int idR)

@@ -36,27 +36,30 @@ public class OrderRepository
         return toAdd;
     }
 
-    public async Task<bool> UpdateOrderAsync(Order order,int idR, int idA)
+    public async Task UpdateOrderAsync(Order order,int idR, int idA)
     {
-        var orderToUpdate = await _dataContext.Orders.FirstOrDefaultAsync(o => o.Id == order.Id && o.AccommodationID ==idA && o.RenterID ==idR);
-        if (orderToUpdate == null)
-        {
-            return false;
-        }
-        orderToUpdate.LeaseEndDate = order.LeaseEndDate;
-        orderToUpdate.LeaseStartDate = order.LeaseStartDate;
-        orderToUpdate.Price = order.Price;
-
-        try
-        {
-            await _dataContext.SaveChangesAsync();
-            return true;
-        }
-        catch (Exception ex)
-        {
-            throw;
-            return false;
-        }
+        //var orderToUpdate = await _dataContext.Orders.FirstOrDefaultAsync(o => o.Id == order.Id && o.AccommodationID ==idA && o.RenterID ==idR);
+        _dataContext.Orders.Update(order);
+        await _dataContext.SaveChangesAsync();
+        // var orderToUpdate = await _dataContext.Orders.FirstOrDefaultAsync(o => o.Id == order.Id && o.AccommodationID ==idA && o.RenterID ==idR);
+        // if (orderToUpdate == null)
+        // {
+        //     return false;
+        // }
+        // orderToUpdate.LeaseEndDate = order.LeaseEndDate;
+        // orderToUpdate.LeaseStartDate = order.LeaseStartDate;
+        // orderToUpdate.Price = order.Price;
+        //
+        // try
+        // {
+        //     await _dataContext.SaveChangesAsync();
+        //     return true;
+        // }
+        // catch (Exception ex)
+        // {
+        //     throw;
+        //     return false;
+        // }
         
     }
 
