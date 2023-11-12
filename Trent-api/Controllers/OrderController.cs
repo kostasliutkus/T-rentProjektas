@@ -12,6 +12,7 @@ namespace T_rent_api.Controllers;
 
 [ApiController]
 [Route("api/Renters/{idR}/Accommodations/{idA}/Orders")]
+
 public class OrderController : ControllerBase
 {
     private readonly OrderRepository _orderRepo;
@@ -30,6 +31,13 @@ public class OrderController : ControllerBase
         var orders = await _orderRepo.GetOrdersAsync(idR,idA);
         if (orders == null)
             return StatusCode(500);
+        var authorizationResult = await _authorizationService.AuthorizeAsync(User, orders.FirstOrDefault(), PolicyNames.ResourceOwner);
+        if (!authorizationResult.Succeeded)
+        {
+            //404
+            //return NotFound();
+            return Forbid();
+        }
         return Ok(orders);
     }
 
@@ -38,6 +46,13 @@ public class OrderController : ControllerBase
     public async Task<IActionResult> GetOrder(int idR, int idA,int id)
     {
         var order = await _orderRepo.GetOrderAsync(idR,idA,id);
+        var authorizationResult = await _authorizationService.AuthorizeAsync(User, order, PolicyNames.ResourceOwner);
+        if (!authorizationResult.Succeeded)
+        {
+            //404
+            //return NotFound();
+            return Forbid();
+        }
         if (order == null)
         {
             return NotFound();
@@ -46,7 +61,6 @@ public class OrderController : ControllerBase
     }
 
     [HttpPost]
-    [Authorize(Roles = TrentRoles.TrentUser)]
     public async Task<IActionResult> AddOrder(CreateOrderDto ordRequest,int idR,int idA)
     {
         if (ordRequest == null)
