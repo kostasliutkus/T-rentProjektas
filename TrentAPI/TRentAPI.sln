@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "T-rent-api", "T-rent-api.csproj", "{03F9C642-02FE-47D8-AF00-5B1656E888C6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TRentAPI", "TRentAPI.csproj", "{03F9C642-02FE-47D8-AF00-5B1656E888C6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
