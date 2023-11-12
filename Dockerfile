@@ -1,19 +1,19 @@
-﻿FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:6.0 AS build
-ARG TARGETARCH
-WORKDIR "/Trent-api"
+﻿# Use the official .NET SDK image for the build stage
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+WORKDIR /source
 
-# copy csproj and restore as distinct layers
-COPY *.csproj .
-RUN dotnet restore -a $TARGETARCH
+# Copy the solution file and restore as distinct layers
+COPY *.sln .
+COPY Trent-api/*.csproj ./Trent-api/
+RUN dotnet restore
 
-# copy and publish app and libraries
-COPY . .
-RUN dotnet publish -a $TARGETARCH --no-restore -o /app
+# Copy the entire project and build the application
+COPY Trent-api/. ./Trent-api/
+WORKDIR /source/Trent-api
+RUN dotnet publish -c Release -o /app --no-restore /p:PublishReadyToRun=true /p:PublishSingleFile=true
 
-
-# final stage/image
-FROM mcr.microsoft.com/dotnet/runtime:6.0
+# Final stage/image
+FROM mcr.microsoft.com/dotnet/aspnet:6.0
 WORKDIR /app
-COPY --from=build /app .
-USER $APP_UID
-ENTRYPOINT ["./TrentApi"]
+COPY --from=build /app ./
+ENTRYPOINT ["./Trent-api"]

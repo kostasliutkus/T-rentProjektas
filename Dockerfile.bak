@@ -3,7 +3,7 @@ ARG TARGETARCH
 WORKDIR "/Trent-api"
 
 # copy csproj and restore as distinct layers
-COPY "Trent-api/*.csproj" .
+COPY *.csproj .
 RUN dotnet restore -a $TARGETARCH
 
 # copy and publish app and libraries
