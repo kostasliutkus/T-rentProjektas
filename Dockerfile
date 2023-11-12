@@ -1,6 +1,6 @@
 # https://hub.docker.com/_/microsoft-dotnet
 FROM mcr.microsoft.com/dotnet/sdk:6.0-alpine AS build
-WORKDIR /TrentAPI
+WORKDIR /src
 
 # copy csproj and restore as distinct layers
 COPY TrentAPI/*.csproj .
