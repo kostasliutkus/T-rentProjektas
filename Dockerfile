@@ -1,3 +1,4 @@
+# Stage 1: Build
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /TrentAPI
 
@@ -11,13 +12,15 @@ COPY TrentAPI/*.csproj ./TrentAPI/
 # copy everything else and build app
 COPY TrentAPI/. ./TrentAPI/
 
+WORKDIR /TrentAPI
 RUN dotnet restore
 
-WORKDIR /app/TrentAPI
-RUN dotnet publish -c Release -o out
+WORKDIR /TrentAPI
+RUN dotnet publish -c Release -o /app/out
 
+# Stage 2: Deploy
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
-FROM base AS final
 WORKDIR /app
-COPY --from=build /app/TrentAPI/out ./
+COPY --from=build /app/out .
+
 ENTRYPOINT ["dotnet", "TrentAPI.dll"]
