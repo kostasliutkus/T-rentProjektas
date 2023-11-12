@@ -1,4 +1,4 @@
-﻿FROM mcr.microsoft.com/dotnet/sdk:7.0-alpine AS build
+﻿FROM mcr.microsoft.com/dotnet/sdk:6.0-alpine AS build
 WORKDIR /Trent-api
 
 # copy csproj and restore as distinct layers
@@ -10,7 +10,7 @@ COPY Trent-api/. .
 RUN dotnet publish -c Release -o /app -r linux-musl-x64 --self-contained true --no-restore /p:PublishReadyToRun=true /p:PublishSingleFile=true
 
 # final stage/image
-FROM mcr.microsoft.com/dotnet/runtime-deps:7.0-alpine-amd64
+FROM mcr.microsoft.com/dotnet/runtime-deps:6.0-alpine-amd64
 WORKDIR /app
 COPY --from=build /app .
 ENTRYPOINT ["./TRent-api"]
