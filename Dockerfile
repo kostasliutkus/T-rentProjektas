@@ -15,7 +15,7 @@ FROM mcr.microsoft.com/dotnet/runtime-deps:7.0-alpine-amd64
 WORKDIR /app
 COPY --from=build /app .
 RUN ls /app
-ENTRYPOINT ["./TrentAPI/TrentAPI"]
+ENTRYPOINT ["./TRentAPI"]
 
 # See: https://github.com/dotnet/announcements/issues/20
 # Uncomment to enable globalization APIs (or delete)
