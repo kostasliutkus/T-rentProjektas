@@ -4,5 +4,5 @@ namespace TRentAPI.Auth.Model;
 
 public class TrentRestUser : IdentityUser
 {
-    //public virtual string Discriminator { get; set; }
+    public bool ForceRelogin { get; set; }
 }

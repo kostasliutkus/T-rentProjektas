@@ -3,7 +3,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using TRentAPI.Auth;
 using TRentAPI.Auth.Model;
-
+using System.Security.Claims;
+using System.Security.Cryptography.Xml;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.JsonWebTokens;
 namespace TRentAPI.Controllers;
 
 [ApiController]
@@ -52,12 +56,43 @@ public class AuthController : ControllerBase
         if (!isPasswordValid)
             return BadRequest("User name or passsword is invalid.");
         
+        user.ForceRelogin = false;
+        await _userManager.UpdateAsync(user);
         //valid user
         //(generate token)
         var roles = await _userManager.GetRolesAsync(user);
 
         var accessToken = _jwtTokenService.CreateAccessToken(user.UserName, user.Id, roles);
-        
-        return Ok(new SuccessfulLoginDto(accessToken));
+        var refreshToken = _jwtTokenService.CreateRefreshToken(user.Id);
+        return Ok(new SuccessfulLoginDto(accessToken,refreshToken));
+    }
+    [HttpPost]
+    [Route("accessToken")]
+    public async Task<IActionResult> AccessToken(RefreshAccessTokenDto refreshAccessTokenDto)
+    {
+        if (!_jwtTokenService.TryParseRefreshToken(refreshAccessTokenDto.RefreshToken, out var claims))
+        {
+            return UnprocessableEntity();
+        }
+
+        var userId = claims.FindFirstValue(JwtRegisteredClaimNames.Sub);
+
+        var user = await _userManager.FindByIdAsync(userId);
+        if (user == null)
+        {
+            return UnprocessableEntity("Invalid token");
+        }
+
+        if (user.ForceRelogin)
+        {
+            return UnprocessableEntity();
+        }
+                
+        var roles = await _userManager.GetRolesAsync(user);
+            
+        var accessToken = _jwtTokenService.CreateAccessToken(user.UserName, user.Id, roles);
+        var refreshToken = _jwtTokenService.CreateRefreshToken(user.Id);
+                
+        return Ok(new SuccessfulLoginDto(accessToken, refreshToken));
     }
 }
