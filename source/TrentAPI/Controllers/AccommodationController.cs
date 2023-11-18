@@ -2,12 +2,12 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using T_rent_api.Auth.Model;
-using T_rent_api.Dtos.Accommodations;
-using T_rent_api.Models;
-using T_rent_api.Repositories;
+using TRentAPI.Auth.Model;
+using TRentAPI.Dtos;
+using TRentAPI.Models;
+using TRentAPI.Repositories;
 
-namespace T_rent_api.Controllers;
+namespace TRentAPI.Controllers;
 
 [ApiController]
 [Route("api/Renters/{idR}/Accommodations")]

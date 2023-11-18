@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using T_rent_api.Auth.Model;
-using T_rent_api.Models;
+using TRentAPI.Auth.Model;
+using TRentAPI.Models;
 
-namespace T_rent_api.Data;
+namespace TRentAPI.Data;
 
 public class TrentDataContext : IdentityDbContext<TrentRestUser>
 {
@@ -14,7 +14,6 @@ public class TrentDataContext : IdentityDbContext<TrentRestUser>
         modelBuilder.Entity<Order>().ToTable("Order");
         modelBuilder.Entity<Renter>().ToTable("Renter");
         modelBuilder.Entity<Accommodation>().ToTable("Accommodation");
-        // Other configurations
     }
     public TrentDataContext(DbContextOptions<TrentDataContext> options,IConfiguration configuration) : base(options)
     {
@@ -25,6 +24,7 @@ public class TrentDataContext : IdentityDbContext<TrentRestUser>
     public DbSet<Renter> Renters { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseNpgsql(_configuration.GetConnectionString("DigitalOceanDBConnection"));
+        optionsBuilder.UseNpgsql(_configuration.GetConnectionString("LocalConnection"));
+        //optionsBuilder.UseNpgsql(_configuration.GetConnectionString("DigitalOceanDBConnection"));
     }
 }

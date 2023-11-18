@@ -1,8 +1,9 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using T_rent_api.Auth.Model;
 using Microsoft.AspNetCore.Authorization;
-namespace T_rent_api.Auth;
+using TRentAPI.Auth.Model;
+
+namespace TRentAPI.Auth;
 
 public class ResourceOwnerAuthorizationHandler : AuthorizationHandler<ResourceOwnerRequirement,IUserOwnedResource>
 {

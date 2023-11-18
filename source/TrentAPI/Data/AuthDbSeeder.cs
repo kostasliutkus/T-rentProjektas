@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using T_rent_api.Auth.Model;
+using TRentAPI.Auth.Model;
 
-namespace T_rent_api.Data;
+namespace TRentAPI.Data;
 
 public class AuthDbSeeder
 {
@@ -23,7 +23,7 @@ public class AuthDbSeeder
     {
         var newAdminUser = new TrentRestUser()
         {
-            Discriminator = "administrator",
+            //Discriminator = "administrator",
             UserName = "admin",
             Email = "admin@gmail.com"
         };

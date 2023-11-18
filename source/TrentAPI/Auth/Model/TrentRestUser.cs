@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace T_rent_api.Auth.Model;
+namespace TRentAPI.Auth.Model;
 
 public class TrentRestUser : IdentityUser
 {
-    public virtual string Discriminator { get; set; }
+    //public virtual string Discriminator { get; set; }
 }

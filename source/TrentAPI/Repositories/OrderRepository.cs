@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using T_rent_api.Data;
-using T_rent_api.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using TRentAPI.Data;
+using TRentAPI.Models;
 
-namespace T_rent_api.Repositories;
+namespace TRentAPI.Repositories;
 
 public class OrderRepository
 {

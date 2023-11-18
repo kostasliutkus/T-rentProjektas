@@ -1,4 +1,4 @@
-﻿namespace T_rent_api.Auth.Model;
+﻿namespace TRentAPI.Auth.Model;
 
 public static class PolicyNames
 {

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace T_rent_api.Auth.Model;
+namespace TRentAPI.Auth.Model;
 
 public record RegisterUserDto([Required] string UserName, [EmailAddress][Required] string Email, [Required] string Password);
 

@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using T_rent_api.Auth.Model;
+using TRentAPI.Auth.Model;
 
-namespace T_rent_api.Models;
+namespace TRentAPI.Models;
 
 public class Accommodation : IUserOwnedResource
 {

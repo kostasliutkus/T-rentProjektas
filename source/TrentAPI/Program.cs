@@ -6,10 +6,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using T_rent_api.Auth;
-using T_rent_api.Auth.Model;
-using T_rent_api.Data;
-using T_rent_api.Repositories;
+using TRentAPI.Auth;
+using TRentAPI.Auth.Model;
+using TRentAPI.Data;
+using TRentAPI.Repositories;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -37,7 +37,7 @@ builder.Services.AddAuthentication(opt =>
     });
 //Add database connection
 builder.Services.AddDbContext<TrentDataContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DigitalOceanDBConnection")));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("LocalConnection")));
 
 builder.Services.AddScoped<OrderRepository>();
 builder.Services.AddScoped<AccommodationRepository>();

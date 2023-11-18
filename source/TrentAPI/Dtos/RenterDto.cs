@@ -1,4 +1,4 @@
-﻿namespace T_rent_api.Dtos.Renters;
+﻿namespace TRentAPI.Dtos;
 
 public record RenterDto(int Id,string FirstName, string LastName, string Organization, int Age, string Email,
     string Phone);

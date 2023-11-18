@@ -1,4 +1,4 @@
-﻿namespace T_rent_api.Dtos.Orders;
+﻿namespace TRentAPI.Dtos;
 
 public record OrderDto(int Id,DateTime CreationDate, DateTime LeaseStartDate, DateTime LeaseEndDate, decimal Price, int AccommodationID,
     int RenterID);

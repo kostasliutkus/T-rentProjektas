@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using T_rent_api.Auth.Model;
-using T_rent_api.Auth;
-using Microsoft.AspNetCore.Authorization;
+using TRentAPI.Auth;
+using TRentAPI.Auth.Model;
 
-namespace T_rent_api.Controllers;
+namespace TRentAPI.Controllers;
 
 [ApiController]
 [AllowAnonymous]
@@ -30,7 +30,7 @@ public class AuthController : ControllerBase
         {
             Email = registerUserDto.Email,
             UserName = registerUserDto.UserName,
-            Discriminator = "default"
+            //Discriminator = "default"
         };
         
         var createUserResult = await _userManager.CreateAsync(newUser, registerUserDto.Password);
