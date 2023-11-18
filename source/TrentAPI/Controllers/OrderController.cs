@@ -60,6 +60,7 @@ public class OrderController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = TrentRoles.TrentUser)]
     public async Task<IActionResult> AddOrder(CreateOrderDto ordRequest,int idR,int idA)
     {
         if (ordRequest == null)
@@ -76,7 +77,13 @@ public class OrderController : ControllerBase
             Price = ordRequest.Price,
             UserId =User.FindFirstValue(JwtRegisteredClaimNames.Sub)
         };
-         
+        var authorizationResult = await _authorizationService.AuthorizeAsync(User, order, PolicyNames.ResourceOwner);
+        if (!authorizationResult.Succeeded)
+        {
+            //404
+            //return NotFound();
+            return Forbid();
+        }
         await _orderRepo.AddOrderAsync(order,idR,idA);
         return Created("",
             new OrderDto(order.Id, order.CreationDate, order.LeaseStartDate, order.LeaseEndDate, order.Price, order.AccommodationID,
@@ -99,11 +106,15 @@ public class OrderController : ControllerBase
         if (order == null)
             return NotFound();
         
-        var authorizationResult = await _authorizationService.AuthorizeAsync(User, order, PolicyNames.ResourceOwner);
-        if (!authorizationResult.Succeeded)
+        // var authorizationResult = await _authorizationService.AuthorizeAsync(User, order, PolicyNames.ResourceOwner);
+        // if (!authorizationResult.Succeeded)
+        // {
+        //     //404
+        //     //return NotFound();
+        //     return Forbid();
+        // }
+        if (User.IsInRole(TrentRoles.Admin) && User.FindFirstValue(JwtRegisteredClaimNames.Sub) != order.UserId)
         {
-            //404
-            //return NotFound();
             return Forbid();
         }
         order.LeaseEndDate = orderToUpdate.LeaseEndDate;
@@ -133,11 +144,15 @@ public class OrderController : ControllerBase
         {
             return NotFound(new { message = "Order not found" });
         }
-        var authorizationResult = await _authorizationService.AuthorizeAsync(User, result, PolicyNames.ResourceOwner);
-        if (!authorizationResult.Succeeded)
+        // var authorizationResult = await _authorizationService.AuthorizeAsync(User, result, PolicyNames.ResourceOwner);
+        // if (!authorizationResult.Succeeded)
+        // {
+        //     //404
+        //     //return NotFound();
+        //     return Forbid();
+        // }
+        if (User.IsInRole(TrentRoles.Admin) && User.FindFirstValue(JwtRegisteredClaimNames.Sub) != result.UserId)
         {
-            //404
-            //return NotFound();
             return Forbid();
         }
 
