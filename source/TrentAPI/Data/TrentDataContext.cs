@@ -24,7 +24,7 @@ public class TrentDataContext : IdentityDbContext<TrentRestUser>
     public DbSet<Renter> Renters { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseNpgsql(_configuration.GetConnectionString("LocalConnection"));
-        //optionsBuilder.UseNpgsql(_configuration.GetConnectionString("DigitalOceanDBConnection"));
+        //optionsBuilder.UseNpgsql(_configuration.GetConnectionString("LocalConnection"));
+        optionsBuilder.UseNpgsql(_configuration.GetConnectionString("DigitalOceanDBConnection"));
     }
 }

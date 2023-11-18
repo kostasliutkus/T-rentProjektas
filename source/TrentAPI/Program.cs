@@ -37,7 +37,7 @@ builder.Services.AddAuthentication(opt =>
     });
 //Add database connection
 builder.Services.AddDbContext<TrentDataContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("LocalConnection")));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DigitalOceanDBConnection")));
 
 builder.Services.AddScoped<OrderRepository>();
 builder.Services.AddScoped<AccommodationRepository>();
