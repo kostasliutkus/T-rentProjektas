@@ -4,9 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using TRentAPI.Auth;
 using TRentAPI.Auth.Model;
 using System.Security.Claims;
-using System.Security.Cryptography.Xml;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.JsonWebTokens;
 namespace TRentAPI.Controllers;
 
