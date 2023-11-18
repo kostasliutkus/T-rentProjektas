@@ -25,6 +25,6 @@ public class Order : IUserOwnedResource
     [Column("fk_renter_id")]
     public int RenterID { get; set; }
     [Required]
-    public required string UserId { get; set; }
+    public string UserId { get; set; }
     public TrentRestUser User { get; set; }
 }
