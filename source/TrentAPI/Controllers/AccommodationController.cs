@@ -62,6 +62,13 @@ public class AccommodationController : ControllerBase
             RenterID = idR,
             UserId = User.FindFirstValue(JwtRegisteredClaimNames.Sub)
         };
+        var authorizationResult = await _authorizationService.AuthorizeAsync(User, accommodation, PolicyNames.ResourceOwner);
+        if (!authorizationResult.Succeeded)
+        {
+            //404
+            //return NotFound();
+            return Forbid();
+        }
         await _AccommodationRepo.AddAccommodationAsync(accommodation, idR);
         return Created("",
             new AccommodationDto(accommodation.Id, accommodation.Instructions, accommodation.Location,
@@ -76,11 +83,15 @@ public class AccommodationController : ControllerBase
 
         if (accommodation == null)
             return NotFound();
-        var authorizationResult = await _authorizationService.AuthorizeAsync(User, accommodation, PolicyNames.ResourceOwner);
-        if (!authorizationResult.Succeeded)
+        // var authorizationResult = await _authorizationService.AuthorizeAsync(User, accommodation, PolicyNames.ResourceOwner);
+        // if (!authorizationResult.Succeeded)
+        // {
+        //     //404
+        //     //return NotFound();
+        //     return Forbid();
+        // }
+        if (User.IsInRole(TrentRoles.Admin) && User.FindFirstValue(JwtRegisteredClaimNames.Sub) != accommodation.UserId)
         {
-            //404
-            //return NotFound();
             return Forbid();
         }
         accommodation.Location = accommodationToUpdate.Location;
@@ -110,14 +121,17 @@ public class AccommodationController : ControllerBase
         {
             return NotFound();
         }
-        var authorizationResult = await _authorizationService.AuthorizeAsync(User, result, PolicyNames.ResourceOwner);
-        if (!authorizationResult.Succeeded)
+        // var authorizationResult = await _authorizationService.AuthorizeAsync(User, result, PolicyNames.ResourceOwner);
+        // if (!authorizationResult.Succeeded)
+        // {
+        //     //404
+        //     //return NotFound();
+        //     return Forbid();
+        // }
+        if (User.IsInRole(TrentRoles.Admin) && User.FindFirstValue(JwtRegisteredClaimNames.Sub) != result.UserId)
         {
-            //404
-            //return NotFound();
             return Forbid();
         }
-
         await _AccommodationRepo.DeleteAccommodationAsync(id,idR);
         return NoContent();
         // var result = await _AccommodationRepo.DeleteAccommodationAsync(id,idR);

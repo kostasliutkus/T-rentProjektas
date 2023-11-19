@@ -36,6 +36,7 @@ public class RenterController : ControllerBase
     public async Task<IActionResult> GetRenter(int id)
     {
         var renter = await _renterRepo.GetRenterAsync(id);
+        
         if (renter == null)
             return NotFound();
         return Ok(renter);
@@ -59,7 +60,13 @@ public class RenterController : ControllerBase
             Phone = renRequest.Phone,
             UserId =User.FindFirstValue(JwtRegisteredClaimNames.Sub)
         };
-         
+        var authorizationResult = await _authorizationService.AuthorizeAsync(User, renter, PolicyNames.ResourceOwner);
+        if (!authorizationResult.Succeeded)
+        {
+            //404
+            //return NotFound();
+            return Forbid();
+        }
         await _renterRepo.AddRenterAsync(renter);
         return Created("", new RenterDto(renter.Id, renter.FirstName, renter.LastName,renter.Organization, renter.Age,renter.Email, renter.Phone));
     }
@@ -72,11 +79,15 @@ public class RenterController : ControllerBase
 
         if (renter == null)
             return NotFound();
-        var authorizationResult = await _authorizationService.AuthorizeAsync(User, renter, PolicyNames.ResourceOwner);
-        if (!authorizationResult.Succeeded)
+        // var authorizationResult = await _authorizationService.AuthorizeAsync(User, renter, PolicyNames.ResourceOwner);
+        // if (!authorizationResult.Succeeded)
+        // {
+        //     //404
+        //     //return NotFound();
+        //     return Forbid();
+        // }
+        if (User.IsInRole(TrentRoles.Admin) && User.FindFirstValue(JwtRegisteredClaimNames.Sub) != renter.UserId)
         {
-            //404
-            //return NotFound();
             return Forbid();
         }
         renter.FirstName = RenterToUpdate.FirstName;
@@ -114,14 +125,17 @@ public class RenterController : ControllerBase
         {
             return NotFound();
         }
-        var authorizationResult = await _authorizationService.AuthorizeAsync(User, result, PolicyNames.ResourceOwner);
-        if (!authorizationResult.Succeeded)
+        // var authorizationResult = await _authorizationService.AuthorizeAsync(User, result, PolicyNames.ResourceOwner);
+        // if (!authorizationResult.Succeeded)
+        // {
+        //     //404
+        //     //return NotFound();
+        //     return Forbid();
+        // }
+        if (User.IsInRole(TrentRoles.Admin) && User.FindFirstValue(JwtRegisteredClaimNames.Sub) != result.UserId)
         {
-            //404
-            //return NotFound();
             return Forbid();
         }
-
         await _renterRepo.DeleteRenterAsync(id);
         return NoContent();
     }
