@@ -113,7 +113,7 @@ public class OrderController : ControllerBase
         //     //return NotFound();
         //     return Forbid();
         // }
-        if (User.IsInRole(TrentRoles.Admin) && User.FindFirstValue(JwtRegisteredClaimNames.Sub) != order.UserId)
+        if (!User.IsInRole(TrentRoles.Admin) && User.FindFirstValue(JwtRegisteredClaimNames.Sub) != order.UserId)
         {
             return Forbid();
         }
@@ -151,7 +151,7 @@ public class OrderController : ControllerBase
         //     //return NotFound();
         //     return Forbid();
         // }
-        if (User.IsInRole(TrentRoles.Admin) && User.FindFirstValue(JwtRegisteredClaimNames.Sub) != result.UserId)
+        if (!User.IsInRole(TrentRoles.Admin) && User.FindFirstValue(JwtRegisteredClaimNames.Sub) != result.UserId)
         {
             return Forbid();
         }

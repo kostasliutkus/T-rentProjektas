@@ -90,7 +90,7 @@ public class AccommodationController : ControllerBase
         //     //return NotFound();
         //     return Forbid();
         // }
-        if (User.IsInRole(TrentRoles.Admin) && User.FindFirstValue(JwtRegisteredClaimNames.Sub) != accommodation.UserId)
+        if (!User.IsInRole(TrentRoles.Admin) && User.FindFirstValue(JwtRegisteredClaimNames.Sub) != accommodation.UserId)
         {
             return Forbid();
         }
@@ -128,7 +128,7 @@ public class AccommodationController : ControllerBase
         //     //return NotFound();
         //     return Forbid();
         // }
-        if (User.IsInRole(TrentRoles.Admin) && User.FindFirstValue(JwtRegisteredClaimNames.Sub) != result.UserId)
+        if (!User.IsInRole(TrentRoles.Admin) && User.FindFirstValue(JwtRegisteredClaimNames.Sub) != result.UserId)
         {
             return Forbid();
         }

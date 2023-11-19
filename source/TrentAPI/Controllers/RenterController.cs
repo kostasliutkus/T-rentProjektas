@@ -86,7 +86,7 @@ public class RenterController : ControllerBase
         //     //return NotFound();
         //     return Forbid();
         // }
-        if (User.IsInRole(TrentRoles.Admin) && User.FindFirstValue(JwtRegisteredClaimNames.Sub) != renter.UserId)
+        if (!User.IsInRole(TrentRoles.Admin) && User.FindFirstValue(JwtRegisteredClaimNames.Sub) != renter.UserId)
         {
             return Forbid();
         }
@@ -132,7 +132,7 @@ public class RenterController : ControllerBase
         //     //return NotFound();
         //     return Forbid();
         // }
-        if (User.IsInRole(TrentRoles.Admin) && User.FindFirstValue(JwtRegisteredClaimNames.Sub) != result.UserId)
+        if (!User.IsInRole(TrentRoles.Admin) && User.FindFirstValue(JwtRegisteredClaimNames.Sub) != result.UserId)
         {
             return Forbid();
         }
