@@ -56,16 +56,16 @@ builder.Services.AddSingleton<IAuthorizationHandler, ResourceOwnerAuthorizationH
 //builder.Services.AddSwaggerGen();
 
 //add cors policy
-// builder.Services.AddCors(opt =>
-// {
-//     opt.AddPolicy(name: "CorsPolicy", Builder =>
-//     {
-//         Builder.WithOrigins("http://localhost:4200")
-//             .AllowAnyHeader()
-//             .AllowAnyMethod()
-//             .AllowCredentials();
-//     });
-// });
+builder.Services.AddCors(opt =>
+{
+    opt.AddPolicy(name: "CorsPolicy", Builder =>
+    {
+        Builder.WithOrigins("http://localhost:4200")
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials();
+    });
+});
 
 var app = builder.Build();
 
@@ -73,6 +73,7 @@ var app = builder.Build();
 
 //app.UseHttpsRedirection();
 app.UseRouting();
+app.UseCors("CorsPolicy");
 app.MapControllers();
 app.UseAuthentication();
 app.UseAuthorization();
