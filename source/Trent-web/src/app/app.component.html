@@ -5,7 +5,11 @@
       <mat-icon>menu</mat-icon>
     </button>
     <span>T-rent accommodation service</span>
+    <button mat-button color="secondary" class="generic-button" (click)="navigateToRenterList()">Renters</button>
+
     <span class="toolbar-spacer"></span>
+    <button mat-button color="secondary" class="generic-button" (click)="navigateToLogin()">Login</button>
+    <button mat-button color="secondary" class="generic-button" (click)="navigateToRegister()">Register</button>
     <button mat-icon-button class="example-icon favorite-icon">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <!-- Circle -->
@@ -22,4 +26,4 @@
   </mat-toolbar>
   </p>
 </div>
-<app-renter-list></app-renter-list>
+<router-outlet></router-outlet>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../../services/api.service';
 import { Renter } from '../../models/Renter.model';
+import {ApiRenterService} from "../../services/api.renter.service";
 @Component({
   selector: 'app-renter-list',
   templateUrl: './renter-list.component.html',
@@ -9,10 +9,10 @@ import { Renter } from '../../models/Renter.model';
 export class RenterListComponent implements OnInit{
   renters: Renter[] = [];
 
-  constructor(private apiService: ApiService) {}
+  constructor(private apiRenterService: ApiRenterService) {}
 
   ngOnInit(): void {
-    this.apiService.getAllRenters().subscribe((data) => {
+    this.apiRenterService.getAllRenters().subscribe((data) => {
       this.renters = data;
     });
   }
