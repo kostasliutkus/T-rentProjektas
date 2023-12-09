@@ -8,7 +8,7 @@ import { Renter } from '../models/Renter.model';
   providedIn: 'root'
 })
 export class ApiRenterService {
-  private path = environment.apiurl + 'Renters'; // Corrected assignment operator
+  private path = environment.apiurl + 'Renters';
   constructor(private httpClient: HttpClient) {}
 
   getRenter(index: number): Observable<Renter> {
@@ -27,7 +27,7 @@ export class ApiRenterService {
     return this.httpClient.post(this.path, renter, { headers: header });
   }
 
-  editRenter(index: number, updatedRenter: Renter): Observable<any> { // Added the updatedRenter parameter
+  editRenter(index: number, updatedRenter: Renter): Observable<any> {
     const header = new HttpHeaders().set('Content-type', 'application/json');
     return this.httpClient.put(`${this.path}/${index}`, updatedRenter, { headers: header });
   }
