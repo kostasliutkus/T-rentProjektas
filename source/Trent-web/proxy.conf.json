@@ -1,0 +1,6 @@
+{
+  "/api": {
+    "target": "https://sea-turtle-app-64g26.ondigitalocean.app",
+    "secure": false
+  }
+}
