@@ -1,6 +1,25 @@
 <div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
+  <p>
+  <mat-toolbar color="primary">
+    <button mat-icon-button>
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>T-rent accommodation service</span>
+    <span class="toolbar-spacer"></span>
+    <button mat-icon-button class="example-icon favorite-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <!-- Circle -->
+        <circle cx="12" cy="6" r="5" fill="currentColor"></circle>
+        <!-- Half Circle -->
+        <path d="M5 20a10 10 0 0 1 15 0" fill="currentColor"></path>
+        <!-- Bottom line -->
+        <line x1="5" y1="20" x2="20" y2="20" stroke="currentColor" stroke-width="2"></line>
+    </svg>
+
+
+
+    </button>
+  </mat-toolbar>
+  </p>
 </div>
 <app-renter-list></app-renter-list>
