@@ -1,0 +1,15 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  //border: black solid 5px;
+}
+
+form {
+  width: 300px;
+  text-align: center;
+}
+input {
+  color:white;
+}

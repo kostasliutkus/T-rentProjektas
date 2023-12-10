@@ -15,6 +15,11 @@ import {MatButtonModule} from '@angular/material/button';
 import {ApiRenterService} from "./services/api.renter.service";
 import {ApiLoginService} from "./services/api.login.service";
 import {ApiRegisterService} from "./services/api.register.service";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatSelectModule} from '@angular/material/select';
+import {MatInputModule} from '@angular/material/input';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +34,13 @@ import {ApiRegisterService} from "./services/api.register.service";
     BrowserAnimationsModule,
     MatIconModule,
     MatButtonModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatSnackBarModule
   ],
   providers: [ApiRenterService,ApiLoginService,ApiRegisterService],
   bootstrap: [AppComponent]
