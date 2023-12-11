@@ -1,22 +1,30 @@
 <div class="register-container">
-  <form #registrationForm="ngForm" (ngSubmit)="registerUser()" novalidate>
-    <mat-form-field>
+  <div class="header">
+    <h4 class="register-header">Register</h4>
+  </div>
+  <form [formGroup]="registerForm" class="form-container" >
+    <mat-form-field class="form-field">
       <mat-label for="username">Username</mat-label>
-      <input matInput type="text" id="username" name="username" [(ngModel)]="userName" required>
+      <input matInput formControlName="userName" type="text" id="username" name="username"  required>
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field class="form-field">
       <mat-label>Email</mat-label>
-      <input matInput type="email" id="email" name="email"[(ngModel)]="email" required>
-    </mat-form-field>
-    <mat-form-field>
+      <input matInput formControlName="email" type="email" id="email" name="email"  required>
+    </mat-form-field >
+
+    <mat-form-field class="form-field">
       <mat-label>Password</mat-label>
-      <input matInput type="password" id="password" name="password" [(ngModel)]="password" required>
+      <input matInput  formControlName="password" type="password" id="password" name="password"  required>
     </mat-form-field>
-    <mat-form-field>
+
+    <mat-form-field class="form-field">
       <mat-label>Confirm Password</mat-label>
-      <input matInput type="password" id="passwordConfirmation" name="passwordConfirmation"[(ngModel)]="passwordConfirmation" required>
+      <input matInput formControlName="passwordConfirmation" type="password" id="passwordConfirmation" name="passwordConfirmation"  required>
     </mat-form-field>
-    <button mat-raised-button color="primary" (click)="registerUser()">Register</button>
+
+    <div class="button-container">
+      <button mat-raised-button color="primary" (click)="registerUser()">Register</button>
+    </div>
   </form>
 </div>
