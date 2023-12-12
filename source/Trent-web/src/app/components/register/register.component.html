@@ -1,11 +1,11 @@
 <div class="register-container">
-  <div class="header">
+  <div class="register-header-container">
     <h4 class="register-header">Register</h4>
   </div>
   <form [formGroup]="registerForm" class="form-container" >
     <mat-form-field class="form-field">
-      <mat-label for="username">Username</mat-label>
-      <input matInput formControlName="userName" type="text" id="username" name="username"  required>
+      <mat-label>Username</mat-label>
+      <input matInput formControlName="userName" type="text" id="username" name="username" required>
     </mat-form-field>
 
     <mat-form-field class="form-field">
@@ -15,7 +15,7 @@
 
     <mat-form-field class="form-field">
       <mat-label>Password</mat-label>
-      <input matInput  formControlName="password" type="password" id="password" name="password"  required>
+      <input matInput formControlName="password" type="password" id="password" name="password"  required>
     </mat-form-field>
 
     <mat-form-field class="form-field">
@@ -25,6 +25,8 @@
 
     <div class="button-container">
       <button mat-raised-button color="primary" (click)="registerUser()">Register</button>
+      <br><br>
+      <a href="javascript:void(0)" class="hyperlink"(click)="navigateToLogin()">Already Registered?</a>
     </div>
   </form>
 </div>

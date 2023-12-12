@@ -1,14 +1,11 @@
-import { Component,OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Router} from "@angular/router";
 import {UserDto} from "../../models/User.Dto";
 import {ApiLoginService} from "../../services/api.login.service";
 import {SuccessfulLoginDto} from "../../models/SuccessfulLogin.Dto";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-import { MatIconRegistry } from '@angular/material/icon';
-import { DomSanitizer } from '@angular/platform-browser';
-
+import {TokenService} from '../../services/token.service'
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -24,18 +21,8 @@ export class LoginComponent implements OnInit{
     private snackBar: MatSnackBar,
     private router: Router,
     private formBuilder: FormBuilder,
-    private matIconRegistry: MatIconRegistry,
-    private domSanitizer: DomSanitizer
-  ){
-    this.matIconRegistry.addSvgIcon(
-      'eye',
-      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/eye.svg')
-    );
-    this.matIconRegistry.addSvgIcon(
-      'eye_off',
-      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/eye_off.svg')
-    );
-  }
+    private tokenService: TokenService
+  ){}
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
       userName: ['',Validators.required],
@@ -58,12 +45,12 @@ export class LoginComponent implements OnInit{
 
           // save access Token
           localStorage.setItem('accessToken', successfulLoginDto.accessToken);
-
+          this.tokenService.setAccessToken('accessToken');
           this.snackBar.open('Login successful', 'Dismiss', { duration: 3000,panelClass:['error-snackbar'] });
 
           // Reset  form
           this.loginForm.reset();
-
+          this.tokenService.setAuthenticated(true);
           this.router.navigate(['/']);
         },
         (error) => {

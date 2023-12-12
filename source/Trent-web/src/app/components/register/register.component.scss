@@ -18,9 +18,6 @@ form {
   color: red;
   background-color:red;
 }
-mat-form-field {
-  length: 120%;
-}
 .form-container {
   padding-top:15px;
   display: flex;
@@ -31,7 +28,7 @@ mat-form-field {
   width: 80%;
   margin-bottom: 15px;
 }
-.header {
+.register-header-container {
   text-align: left;
   background-color: #7b1fa2;
   padding: 10px;
@@ -47,4 +44,7 @@ mat-form-field {
   padding-bottom:15px;
   //display: flex;
   margin-right:10px;
+}
+.hyperlink{
+  color:white;
 }

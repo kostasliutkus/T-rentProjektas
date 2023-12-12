@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  //height: 50vh;
+  //height: 100vh;
   border: 2px solid #ccc; /*koreguoti*/
   padding: 0px;/*koreguoti*/
   margin: 0 auto; /*koreguoti*/
@@ -18,9 +18,6 @@ form {
   color: red;
   background-color:red;
 }
-mat-form-field {
-  length: 120%;
-}
 .form-container {
   padding-top:15px;
   display: flex;
@@ -31,7 +28,7 @@ mat-form-field {
   width: 80%;
   margin-bottom: 15px;
 }
-.header {
+.login-header-container {
   text-align: left;
   background-color: #7b1fa2;
   padding: 10px;
@@ -48,3 +45,7 @@ mat-form-field {
   //display: flex;
   margin-right:10px;
 }
+.hyperlink{
+  color:white;
+}
+

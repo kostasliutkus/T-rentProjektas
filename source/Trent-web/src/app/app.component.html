@@ -1,31 +1,50 @@
-<body>
-<div style="text-align:center">
-  <p>
-  <mat-toolbar color="primary">
-    <button mat-icon-button [hidden]="true">
+<mat-sidenav-container>
+  <mat-sidenav #sidenav class="main-side-nav">
+    <button mat-icon-button (click)="sidenav.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
-    <span>T-rent accommodation service</span>
-    <button mat-button color="secondary" class="generic-button" (click)="navigateToRenterList()">Renters</button>
-
+    <br>
+    <button mat-button class="side-nav-button" (click)="navigateToHome(); sidenav.close();">Home</button>
+    <br>
+    <button mat-button color="secondary" class="side-nav-button" (click)="navigateToRenterList(); sidenav.close();">Renters</button>
+    <br>
     <span class="toolbar-spacer"></span>
-    <button mat-button color="secondary" class="generic-button" (click)="navigateToLogin()">Login</button>
-    <button mat-button color="secondary" class="generic-button" (click)="navigateToRegister()">Register</button>
-    <button mat-icon-button class="example-icon favorite-icon">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <!-- Circle -->
-        <circle cx="12" cy="6" r="5" fill="currentColor"></circle>
-        <!-- Half Circle -->
-        <path d="M5 20a10 10 0 0 1 15 0" fill="currentColor"></path>
-        <!-- Bottom line -->
-        <line x1="5" y1="20" x2="20" y2="20" stroke="currentColor" stroke-width="2"></line>
-    </svg>
+    <button mat-button color="secondary" class="side-nav-button" *ngIf="!isAuthenticated" (click)="navigateToLogin(); sidenav.close();">Login</button>
+    <br *ngIf="!isAuthenticated">
+    <button mat-button color="secondary" class="side-nav-button" *ngIf="!isAuthenticated"(click)="navigateToRegister(); sidenav.close();">Register</button>
+    <br *ngIf="!isAuthenticated">
+    <button mat-button color="secondary" class="side-nav-button" *ngIf="isAuthenticated" (click)="logout(); sidenav.close();">Logout</button>
+  </mat-sidenav>
 
+  <mat-sidenav-content>
+    <p>
+      <mat-toolbar color="primary">
+        <button mat-icon-button (click)="sidenav.toggle()" *ngIf="isHandset">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <button mat-icon-button class="home-mat-icon-button" (click)="navigateToHome(); sidenav.close();" *ngIf="!isHandset">
+          <mat-icon>home</mat-icon>
+        </button>
+        <span>T-rent accommodation service</span>
 
-
-    </button>
-  </mat-toolbar>
-  </p>
-</div>
-<router-outlet></router-outlet>
-</body>
+        <button mat-button color="secondary" class="generic-button" *ngIf="!isHandset" (click)="navigateToRenterList() ">Renters</button>
+        <span class="toolbar-spacer"></span>
+        <button mat-button color="secondary" class="generic-button" *ngIf="!isHandset && !isAuthenticated" (click)="navigateToLogin()">Login</button>
+        <button mat-button color="secondary" class="generic-button" *ngIf="!isHandset && !isAuthenticated" (click)="navigateToRegister()">Register</button>
+        <button mat-button color="secondary" class="generic-button" *ngIf="!isHandset && isAuthenticated" (click)="logout()">Logout</button>
+        <button mat-icon-button class="example-icon favorite-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <!-- Circle -->
+            <circle cx="12" cy="6" r="5" fill="currentColor"></circle>
+            <!-- Half Circle -->
+            <path d="M5 20a10 10 0 0 1 15 0" fill="currentColor"></path>
+            <!-- Bottom line -->
+            <line x1="5" y1="20" x2="20" y2="20" stroke="currentColor" stroke-width="2"></line>
+          </svg>
+        </button>
+      </mat-toolbar>
+    </p>
+    <!-- Main content goes here -->
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

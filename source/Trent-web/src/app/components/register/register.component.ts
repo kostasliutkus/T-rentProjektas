@@ -25,23 +25,26 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
       userName: ['', Validators.required],
-      email: ['',Validators.required],
+      email: ['',[Validators.required,Validators.email]],
       password: ['', Validators.required],
       passwordConfirmation: ['', Validators.required],
     })
   }
+  navigateToLogin() {
+    this.router.navigate(['/login']);
+  }
   registerUser(): void {
     if (this.registerForm.valid) {
-      if (this.password !== this.passwordConfirmation) {
+      if (this.registerForm.get('password')?.value !== this.registerForm.get('passwordConfirmation')?.value) {
         console.error('Passwords do not match');
         this.snackBar.open('Passwords do not match', 'Dismiss', {duration: 3000});
         return;
       }
 
       const registerUserDto = {
-        userName: this.userName,
-        email: this.email,
-        password: this.password,
+        userName: this.registerForm.get('userName')?.value,
+        email: this.registerForm.get('email')?.value,
+        password: this.registerForm.get('password')?.value,
       };
       this.apiRegisterService.register(registerUserDto).subscribe(
         (userDto: UserDto) => {

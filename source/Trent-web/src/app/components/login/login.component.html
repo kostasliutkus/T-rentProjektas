@@ -1,5 +1,5 @@
-<div class="login-container">
-  <div class="header">
+<div class="login-container" >
+  <div class="login-header-container">
   <h4 class="login-header">Login</h4>
   </div>
   <form [formGroup]="loginForm" class="form-container">
@@ -10,15 +10,15 @@
 
     <mat-form-field class="form-field">
       <mat-label>Password</mat-label>
-      <input matInput type="{{ showPassword ? 'text' : 'password' }}" formControlName="password" id="password" name="password" required>
+      <input matInput [type]="showPassword ? 'text' : 'password'" formControlName="password" id="password" name="password" required>
       <button mat-icon-button matSuffix (click)="togglePasswordVisibility()">
-        <mat-icon>{{ showPassword ? 'eye_off' : 'eye' }}</mat-icon>
+        <mat-icon>{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
       </button>
     </mat-form-field>
     <br>
     <div class="button-container">
-    <button mat-raised-button color="primary" class="login-button" (click)="loginUser()">Login</button>
-      <a href="javascript:void(0)" (click)="navigateToRegister()">Register</a>
+    <button mat-raised-button color="primary" class="login-button" (click)="loginUser()">Login</button><br><br>
+      <a href="javascript:void(0)" class="hyperlink"(click)="navigateToRegister()">Create an Account</a>
     </div>
   </form>
 </div>

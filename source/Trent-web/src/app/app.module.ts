@@ -20,6 +20,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {MatSidenavModule} from "@angular/material/sidenav";
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,8 +40,8 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     MatSelectModule,
     MatInputModule,
     ReactiveFormsModule,
-    FormsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatSidenavModule
   ],
   providers: [ApiRenterService,ApiLoginService,ApiRegisterService],
   bootstrap: [AppComponent]
