@@ -21,28 +21,34 @@ import {MatInputModule} from '@angular/material/input';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatSidenavModule} from "@angular/material/sidenav";
+import {MatTableModule} from "@angular/material/table";
+import { AccommodationListComponent } from './components/accommodation-list/accommodation-list.component';
+import { RenterComponent } from './components/renter/renter.component';
 @NgModule({
   declarations: [
     AppComponent,
     RenterListComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    AccommodationListComponent,
+    RenterComponent
   ],
-  imports: [
-    HttpClientModule,
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatIconModule,
-    MatButtonModule,
-    MatToolbarModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatInputModule,
-    ReactiveFormsModule,
-    MatSnackBarModule,
-    MatSidenavModule
-  ],
+    imports: [
+        HttpClientModule,
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatIconModule,
+        MatButtonModule,
+        MatToolbarModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        MatSnackBarModule,
+        MatSidenavModule,
+        MatTableModule
+    ],
   providers: [ApiRenterService,ApiLoginService,ApiRegisterService],
   bootstrap: [AppComponent]
 })
