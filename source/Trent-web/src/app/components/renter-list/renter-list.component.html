@@ -1,8 +1,9 @@
-<!--<p>renter-list works!</p>-->
-<!--<div *ngFor="let renter of renters">-->
-<!--  <p>{{ renter.firstName }} {{ renter.lastName }} - {{ renter.email }}</p>-->
-<!--</div>-->
-<table mat-table [dataSource]="renters" class="mat-elevation-z8">
+<div class="buttons-div" *ngIf="isAuthenticated" >
+  <div class="button-container">
+    <button mat-raised-button color="primary" class=""  (click)="createRenter()">Create new</button><br><br>
+  </div>
+</div>
+<table mat-table [dataSource]="renters" class="mat-table-renters">
   <!-- Position Column -->
   <ng-container matColumnDef="firstName">
     <th mat-header-cell *matHeaderCellDef> First Name </th>
@@ -36,6 +37,10 @@
     <th mat-header-cell *matHeaderCellDef> Phone </th>
     <td mat-cell *matCellDef="let renter"> {{renter.phone}} </td>
   </ng-container>
+
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row  (click)="goToRenter(renter)" *matRowDef="let renter; columns: displayedColumns;"></tr>
+  <br>
+
 </table>
+

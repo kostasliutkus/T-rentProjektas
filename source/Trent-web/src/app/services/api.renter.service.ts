@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../environments/environment';
 import { Renter } from '../models/Renter.model';
+import {CreateRenterDto} from "../models/Dtos/RenterDTOs";
 
 @Injectable({
   providedIn: 'root'
@@ -22,9 +23,9 @@ export class ApiRenterService {
     return this.httpClient.get<Renter[]>(this.path, { headers: header, withCredentials: true });
   }
 
-  addRenter(renter: Renter): Observable<any> {
+  addRenter(createRenterDto: CreateRenterDto): Observable<any> {
     const header = new HttpHeaders().set('Content-type', 'application/json');
-    return this.httpClient.post(this.path, renter, { headers: header });
+    return this.httpClient.post(this.path, createRenterDto, { headers: header });
   }
 
   editRenter(index: number, updatedRenter: Renter): Observable<any> {

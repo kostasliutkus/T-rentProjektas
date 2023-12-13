@@ -24,6 +24,8 @@ import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatTableModule} from "@angular/material/table";
 import { AccommodationListComponent } from './components/accommodation-list/accommodation-list.component';
 import { RenterComponent } from './components/renter/renter.component';
+import { AddRenterComponent } from './components/add-renter/add-renter.component';
+import {MatDialogModule} from "@angular/material/dialog";
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +33,8 @@ import { RenterComponent } from './components/renter/renter.component';
     RegisterComponent,
     LoginComponent,
     AccommodationListComponent,
-    RenterComponent
+    RenterComponent,
+    AddRenterComponent
   ],
     imports: [
         HttpClientModule,
@@ -47,7 +50,8 @@ import { RenterComponent } from './components/renter/renter.component';
         ReactiveFormsModule,
         MatSnackBarModule,
         MatSidenavModule,
-        MatTableModule
+        MatTableModule,
+        MatDialogModule,
     ],
   providers: [ApiRenterService,ApiLoginService,ApiRegisterService],
   bootstrap: [AppComponent]
