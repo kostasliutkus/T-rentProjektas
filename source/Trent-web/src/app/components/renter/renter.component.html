@@ -1,3 +1,51 @@
-<div class="center">
-  <h1 class="title"> {{renter.firstName}}</h1>
+<div class="button-container">
+  <h4 class="manage-header">{{firstName }} {{lastName }}</h4>
+<button mat-button color="primary" *ngIf="isAuthorized" (click)="toggleEditForm()">Edit</button>
+<button mat-button color="warn" *ngIf="isAuthorized" (click)="openDeleteConfirmation()">Delete</button>
+</div>
+  <div class="manage-container" *ngIf="isEditing">
+  <div class="manage-header-container">
+    <h4 class="manage-header">Edit Renter</h4>
+  </div>
+
+  <!-- Edit form -->
+  <div *ngIf="isEditing" class="form-container">
+    <form [formGroup]="editForm">
+
+      <mat-form-field class="form-field">
+      <mat-label for="firstName">First Name:</mat-label>
+      <input matInput formControlName="firstName" required>
+      </mat-form-field>
+
+      <mat-form-field class="form-field">
+        <mat-label for="lastName">Last Name:</mat-label>
+        <input matInput formControlName="lastName" required>
+      </mat-form-field>
+
+      <mat-form-field class="form-field">
+        <mat-label for="organization">Organization:</mat-label>
+        <input matInput formControlName="organization" required>
+      </mat-form-field>
+
+      <mat-form-field class="form-field">
+        <mat-label for="age">Age:</mat-label>
+        <input matInput formControlName="age" required>
+      </mat-form-field>
+
+      <mat-form-field class="form-field">
+        <mat-label for="email">Email:</mat-label>
+        <input matInput formControlName="email" required>
+      </mat-form-field>
+
+      <mat-form-field class="form-field">
+        <mat-label for="phone">Phone:</mat-label>
+        <input matInput formControlName="email" required>
+      </mat-form-field>
+
+      <div class="button-container">
+        <button mat-raised-button color="primary" class="generic-button" type="submit" (click)="saveEdit()">Save</button>
+        <button mat-button type="button" color="secondary" class="generic-button"(click)="toggleEditForm()">Cancel</button>
+      </div>
+    </form>
+  </div>
 </div>

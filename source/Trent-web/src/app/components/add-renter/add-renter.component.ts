@@ -5,7 +5,7 @@ import {ApiRenterService} from "../../services/api.renter.service";
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {CreateRenterDto} from "../../models/Dtos/RenterDTOs";
-
+import {TokenService} from '../../services/token.service';
 @Component({
   selector: 'app-add-renter',
   templateUrl: './add-renter.component.html',
@@ -14,7 +14,7 @@ import {CreateRenterDto} from "../../models/Dtos/RenterDTOs";
 export class AddRenterComponent implements OnInit{
   renter!: CreateRenterDto;
   renterForm!: FormGroup;
-  constructor(private formBuilder:FormBuilder,private dialogRef:MatDialogRef<AddRenterComponent>,private apiRenterService: ApiRenterService,private _snackBar: MatSnackBar) {}
+  constructor(private formBuilder:FormBuilder,private dialogRef:MatDialogRef<AddRenterComponent>,private apiRenterService: ApiRenterService,private _snackBar: MatSnackBar,private tokenService: TokenService) {}
   closeDialog(): void{
     this.dialogRef.close();
   }
@@ -33,17 +33,23 @@ export class AddRenterComponent implements OnInit{
   }
   addRenter() {
     if(this.renterForm.valid){
-      const RenterDto = this.renterForm.value;
-      this.apiRenterService.addRenter(RenterDto).subscribe(
-        response => {
-          console.log('Renter added successfully', response);
-          this.closeDialog();
-          this.openSnackBar("Renter added successfully");
-        },
-        error => {
-          console.error('Error adding Renter', error);
-        }
-      );
+      if (this.tokenService.isAuthenticated()) {
+        const RenterDto = this.renterForm.value;
+        this.apiRenterService.addRenter(RenterDto).subscribe(
+          response => {
+            console.log('Renter added successfully', response);
+            this.closeDialog();
+            this.openSnackBar("Renter added successfully");
+
+            this.apiRenterService.notifyRenterAdded();
+          },
+          error => {
+            console.error('Error adding Renter', error);
+          }
+        );
+      } else {
+        console.error('User not authenticated');
+      }
     }
   }
   openSnackBar(message: string) {

@@ -8,6 +8,8 @@
     <br>
     <button mat-button color="secondary" class="side-nav-button" (click)="navigateToRenterList(); sidenav.close();">Renters</button>
     <br>
+    <button mat-button color="secondary" class="side-nav-button" (click)="navigateToAccommodationList(); sidenav.close();">Accommodations</button>
+    <br>
     <span class="toolbar-spacer"></span>
     <button mat-button color="secondary" class="side-nav-button" *ngIf="!isAuthenticated" (click)="navigateToLogin(); sidenav.close();">Login</button>
     <br *ngIf="!isAuthenticated">
@@ -28,6 +30,7 @@
         <span>T-rent accommodation service</span>
 
         <button mat-button color="secondary" class="generic-button" *ngIf="!isHandset" (click)="navigateToRenterList() ">Renters</button>
+        <button mat-button color="secondary" class="generic-button" *ngIf="!isHandset" (click)="navigateToAccommodationList() ">Accommodations</button>
         <span class="toolbar-spacer"></span>
         <button mat-button color="secondary" class="generic-button" *ngIf="!isHandset && !isAuthenticated" (click)="navigateToLogin()">Login</button>
         <button mat-button color="secondary" class="generic-button" *ngIf="!isHandset && !isAuthenticated" (click)="navigateToRegister()">Register</button>
@@ -44,7 +47,16 @@
         </button>
       </mat-toolbar>
     </p>
-    <!-- Main content goes here -->
+    <div class="center" *ngIf="isAtHome">
+    <h1 *ngIf="isAuthenticated && !rentersVisited">Now you can check out some renters</h1>
+      <h1 *ngIf="isAuthenticated && rentersVisited">Fell free to explore</h1>
+      <h1 *ngIf="!isAuthenticated">Start by registering and logging in</h1>
+    </div>
+    <footer class="footer">
+      <div class="footer-content">
+        <p>&copy; 2023 T-rent | Kostas Liutkus</p>
+      </div>
+    </footer>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

@@ -14,8 +14,11 @@ export class AccommodationListComponent implements OnInit{
   constructor(private apiAccommodationService: ApiAccommodationService) {}
 
   ngOnInit(): void {
-    // this.apiAccommodationService.getAllAccommodations().subscribe((data: Accommodation[]) => {
-    //   this.accommodations = data;
-    // });
+    this.LoadAccommodations(4);
+  }
+  private LoadAccommodations(idR: number){
+    this.apiAccommodationService.getAllAccommodations(idR).subscribe((data) => {
+      this.accommodations = data;
+    });
   }
 }

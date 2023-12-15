@@ -23,9 +23,13 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatTableModule} from "@angular/material/table";
 import { AccommodationListComponent } from './components/accommodation-list/accommodation-list.component';
-import { RenterComponent } from './components/renter/renter.component';
+import { RenterComponent,DeleteConfirmationDialogComponent } from './components/renter/renter.component';
 import { AddRenterComponent } from './components/add-renter/add-renter.component';
 import {MatDialogModule} from "@angular/material/dialog";
+import { OrderListComponent } from "./components/order-list/order-list.component";
+import {ApiOrderService} from "./services/api-order.service";
+import { OrderComponent } from './components/order/order.component';
+import { AddOrderComponent } from './components/add-order/add-order.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +38,11 @@ import {MatDialogModule} from "@angular/material/dialog";
     LoginComponent,
     AccommodationListComponent,
     RenterComponent,
-    AddRenterComponent
+    AddRenterComponent,
+    DeleteConfirmationDialogComponent,
+    OrderListComponent,
+    OrderComponent,
+    AddOrderComponent
   ],
     imports: [
         HttpClientModule,
@@ -52,8 +60,9 @@ import {MatDialogModule} from "@angular/material/dialog";
         MatSidenavModule,
         MatTableModule,
         MatDialogModule,
+        FormsModule,
     ],
-  providers: [ApiRenterService,ApiLoginService,ApiRegisterService],
+  providers: [ApiRenterService,ApiLoginService,ApiRegisterService,ApiOrderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
