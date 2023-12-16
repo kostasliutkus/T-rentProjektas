@@ -73,22 +73,8 @@ public class OrderRepository
     }
     public async Task<IEnumerable<Order>> GetOrdersByUserAsync(string userId)
     {
-        try
-        {
-            var orders = await _dataContext.Orders
+            return await _dataContext.Orders
                 .Where(o => o.UserId == userId)
                 .ToListAsync();
-
-            var orderDtos = orders.Select(o => new Order
-            {
-                Id = o.Id,
-            });
-
-            return orderDtos;
-        }
-        catch (Exception ex)
-        {
-            throw new ApplicationException("An error occurred while fetching orders by user.", ex);
-        }
     }
 }
