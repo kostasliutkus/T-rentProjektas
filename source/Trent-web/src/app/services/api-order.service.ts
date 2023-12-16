@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {environment} from "../environments/environment";
 import {CreateOrderDto, OrderDto, UpdateOrderDto} from "../models/Dtos/OrderDTOs";
+import {Order} from "../models/Order.Dto";
 @Injectable({
   providedIn: 'root'
 })
@@ -20,9 +21,9 @@ export class ApiOrderService {
       'Authorization': `Bearer ${accessToken}`
     });
   }
-  getOrders(idR: number, idA: number): Observable<OrderDto[]> {
+  getOrders(idR: number, idA: number): Observable<Order[]> {
     const url = `${this.path}Renters/${idR}/Accommodations/${idA}/Orders`;
-    return this.httpClient.get<OrderDto[]>(url, { headers: this.getHeaders() });
+    return this.httpClient.get<Order[]>(url, { headers: this.getHeaders() });
   }
 
   getOrder(idR: number, idA: number, orderId: number): Observable<OrderDto> {
@@ -35,7 +36,7 @@ export class ApiOrderService {
     return this.httpClient.post<OrderDto>(url, ordRequest, { headers: this.getHeaders() });
   }
 
-  changeOrder(id: number, orderToUpdate: UpdateOrderDto, idR: number, idA: number): Observable<OrderDto> {
+  editOrder(id: number, orderToUpdate: UpdateOrderDto, idR: number, idA: number): Observable<OrderDto> {
     const url = `${this.path}Renters/${idR}/Accommodations/${idA}/Orders/${id}`;
     return this.httpClient.put<OrderDto>(url, orderToUpdate, { headers: this.getHeaders() });
   }
@@ -43,5 +44,10 @@ export class ApiOrderService {
   deleteOrder(id: number, idR: number, idA: number): Observable<void> {
     const url = `${this.path}Renters/${idR}/Accommodations/${idA}/Orders/${id}`;
     return this.httpClient.delete<void>(url, { headers: this.getHeaders() });
+  }
+  getOrdersByUser(): Observable<Order[]> {
+    const url = `${this.path}Renters/0/Accommodations/0/Orders/api/GetOrdersByUser`;
+    // console.log('URL  - ',url)
+    return this.httpClient.get<Order[]>(url,{headers: this.getHeaders()});
   }
 }

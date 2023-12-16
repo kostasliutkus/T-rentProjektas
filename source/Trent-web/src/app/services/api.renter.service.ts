@@ -29,7 +29,6 @@ export class ApiRenterService {
   }
 
   getAllRenters(): Observable<Renter[]> {
-    // console.log(this.path)
     const header = new HttpHeaders().set('Content-type', 'application/json');
     return this.httpClient.get<Renter[]>(this.path, { headers: header, withCredentials: true });
   }

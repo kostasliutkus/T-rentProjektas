@@ -58,6 +58,8 @@ export class AddOrderComponent implements OnInit{
             this.snackBar.open('Order Created successfully', 'Dismiss', {duration: 3000});
             // Reset  form
             this.orderForm.reset();
+            //go to profile
+            this.router.navigate(['profile']);
           },
           (error) => {
             console.error('Error creating order:', error);

@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Accommodation} from '../../models/Dtos/AccommodationDTOs';
 import {ApiAccommodationService} from "../../services/api.accommodation.service";
+import {ActivatedRoute, Router} from "@angular/router";
+import {TokenService} from "../../services/token.service";
 
 @Component({
   selector: 'app-accommodation-list',
@@ -10,15 +12,33 @@ import {ApiAccommodationService} from "../../services/api.accommodation.service"
 export class AccommodationListComponent implements OnInit{
   displayedColumns: string[] = ['location', 'instructions'];
   accommodations: Accommodation[] = [];
-
-  constructor(private apiAccommodationService: ApiAccommodationService) {}
+  idR!: number;
+  constructor(
+    private apiAccommodationService: ApiAccommodationService,
+    private route: ActivatedRoute,
+    private tokenService: TokenService,
+    private router: Router
+    ) {}
 
   ngOnInit(): void {
-    this.LoadAccommodations(4);
+    this.route.paramMap.subscribe(params=>
+    {
+      const id = params.get('idR');
+      if (typeof id === "string") {
+        this.idR = parseInt(id);
+
+      }
+    })
+    this.LoadAccommodations(this.idR);
   }
   private LoadAccommodations(idR: number){
+    if(this.tokenService.isAuthenticated())
     this.apiAccommodationService.getAllAccommodations(idR).subscribe((data) => {
       this.accommodations = data;
     });
+
+  }
+  goToAccommodation(accommodation: Accommodation){
+    this.router.navigate(['/accommodation',accommodation.renterID,accommodation.id]);
   }
 }

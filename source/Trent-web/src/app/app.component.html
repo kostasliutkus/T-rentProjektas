@@ -6,9 +6,10 @@
     <br>
     <button mat-button class="side-nav-button" (click)="navigateToHome(); sidenav.close();">Home</button>
     <br>
+    <button mat-button class="side-nav-button" (click)="navigateToProfile(); sidenav.close();">Profile</button>
     <button mat-button color="secondary" class="side-nav-button" (click)="navigateToRenterList(); sidenav.close();">Renters</button>
     <br>
-    <button mat-button color="secondary" class="side-nav-button" (click)="navigateToAccommodationList(); sidenav.close();">Accommodations</button>
+    <button mat-button color="secondary" class="side-nav-button" (click)="navigateToAddOrder(); sidenav.close();">New Order</button>
     <br>
     <span class="toolbar-spacer"></span>
     <button mat-button color="secondary" class="side-nav-button" *ngIf="!isAuthenticated" (click)="navigateToLogin(); sidenav.close();">Login</button>
@@ -30,13 +31,12 @@
         <span>T-rent accommodation service</span>
 
         <button mat-button color="secondary" class="generic-button" *ngIf="!isHandset" (click)="navigateToRenterList() ">Renters</button>
-        <button mat-button color="secondary" class="generic-button" *ngIf="!isHandset" (click)="navigateToAccommodationList() ">Accommodations</button>
         <button mat-button color="secondary" class="generic-button" *ngIf="!isHandset" (click)="navigateToAddOrder() ">New Order</button>
         <span class="toolbar-spacer"></span>
         <button mat-button color="secondary" class="generic-button" *ngIf="!isHandset && !isAuthenticated" (click)="navigateToLogin()">Login</button>
         <button mat-button color="secondary" class="generic-button" *ngIf="!isHandset && !isAuthenticated" (click)="navigateToRegister()">Register</button>
         <button mat-button color="secondary" class="generic-button" *ngIf="!isHandset && isAuthenticated" (click)="logout()">Logout</button>
-        <button mat-icon-button class="example-icon favorite-icon">
+        <button mat-icon-button class="example-icon favorite-icon" *ngIf="isAuthenticated" (click)="navigateToProfile()">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <!-- Circle -->
             <circle cx="12" cy="6" r="5" fill="currentColor"></circle>

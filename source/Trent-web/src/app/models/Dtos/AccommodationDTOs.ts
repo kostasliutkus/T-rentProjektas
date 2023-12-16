@@ -3,6 +3,7 @@ export interface Accommodation {
   location: string;
   instructions: string;
   renterID: number;
+  userId: string;
 }
 export interface CreateAccommodationDto {
   location: string;

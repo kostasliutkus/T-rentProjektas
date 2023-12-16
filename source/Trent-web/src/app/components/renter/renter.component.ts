@@ -32,7 +32,6 @@ export class RenterComponent implements OnInit {
     private snackBar: MatSnackBar
   ) {}
   ngOnInit() {
-
     this.route.paramMap.subscribe(params=>
     {
       const id = params.get('id');
@@ -78,7 +77,7 @@ export class RenterComponent implements OnInit {
     this.isEditing = !this.isEditing;
   }
   saveEdit(): void {
-    if (this.editForm.valid) {
+    if (this.editForm.valid && this.isAuthorized) {
       const renterUpdateDto = this.editForm.value;
       this.apiRenterService.editRenter(this.renter.id, renterUpdateDto).subscribe(
         updatedRenter => {
@@ -106,17 +105,24 @@ export class RenterComponent implements OnInit {
     });
   }
   deleteRenter(): void {
-    this.apiRenterService.deleteRenter(this.renter.id).subscribe(
-      () => {
-        console.log('Renter deleted successfully');
-        // gristi namo
-      },
-      error => {
-        console.error('Error deleting Renter', error);
-      }
-    );
+    if(this.tokenService.isAuthenticated()){
+      this.apiRenterService.deleteRenter(this.renter.id).subscribe(
+        () => {
+          console.log('Renter deleted successfully');
+          this.snackBar.open('Renter deleted successfully', 'Dismiss', { duration: 3000});
+          this.router.navigate(['/']);
+        },
+        error => {
+          console.error('Error deleting Renter', error);
+        }
+      );
+    }else{
+      console.log('Please log in');
+    }
   }
-
+  navigateToAccommodationList() {
+    this.router.navigate(['/accommodation-list',this.index]);
+  }
 }
 @Component({
   selector: 'app-delete-confirmation-dialog',

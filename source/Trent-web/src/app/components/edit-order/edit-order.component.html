@@ -1,0 +1,47 @@
+<div class="form-container">
+  <form [formGroup]="editForm">
+    <mat-form-field class="form-field">
+      <mat-label>Creation date</mat-label>
+      <input matInput formControlName="creationDate" [matDatepicker]="picker3">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker3"></mat-datepicker-toggle>
+      <mat-datepicker #picker3></mat-datepicker>
+    </mat-form-field>
+
+
+    <mat-form-field class="form-field">
+      <mat-label>Lease Start date</mat-label>
+      <input matInput formControlName="leaseStartDate" [matDatepicker]="picker1" required>
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+
+<!--    <mat-form-field class="form-field">-->
+<!--      <mat-label for="leaseStartDate">Lease Start Date</mat-label>-->
+<!--      <input matInput formControlName="leaseStartDate" required>-->
+<!--    </mat-form-field>-->
+
+<!--    <mat-form-field class="form-field">-->
+<!--      <mat-label for="leaseEndDate">Lease End Date</mat-label>-->
+<!--      <input matInput formControlName="leaseEndDate" required>-->
+<!--    </mat-form-field>-->
+    <mat-form-field class="form-field">
+      <mat-label>Lease End date</mat-label>
+      <input matInput formControlName="leaseEndDate" [matDatepicker]="picker2" required>
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="form-field">
+      <mat-label for="price">Price:</mat-label>
+      <input matInput formControlName="price" required>
+    </mat-form-field>
+
+    <div class="button-container">
+      <button mat-raised-button color="primary" class="generic-button" type="submit" (click)="saveEdit()">Save</button>
+      <button mat-button type="button" color="secondary" class="generic-button"(click)="navigateToProfile()">Cancel</button>
+    </div>
+  </form>
+</div>

@@ -25,26 +25,41 @@ export class TokenService {
   private decodeToken(token: string): any {
     const payloadBase64 = token.split('.')[1];
     const payload = atob(payloadBase64);
-
     return JSON.parse(payload);
   }
   private getToken(): string | null {
     return localStorage.getItem(this.accessTokenKey);
   }
-  private getUserRole(): string | null {
+  getUserName(): string | null {
+    const token = this.getToken();
+    if (token) {
+      const decodedToken = this.jwtHelper.decodeToken(token);
+      return decodedToken?.['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'] || null;
+    } else {
+      console.error('Token is null');
+      return null;
+    }
+  }
+  getUserRole(): string | null {
     const token = this.getToken();
 
     if (token) {
       const decodedToken = this.jwtHelper.decodeToken(token);
-      if (decodedToken && decodedToken.role) {
-        return decodedToken.role;
-      } else {
-        console.error('Role not found in the decoded token');
-        return null;
-      }
+      return decodedToken?.['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] || null;
     } else {
       console.error('Token is null');
       return null;
+    }
+  }
+  getDecodedUserId(): string {
+    const token = this.getToken();
+    if (token) {
+      const decodedToken = this.jwtHelper.decodeToken(token);
+      return decodedToken.sub;
+
+    }else {
+      console.error('Token is null');
+      return '';
     }
   }
   setAccessToken(token: string): void {
@@ -59,26 +74,9 @@ export class TokenService {
   setAuthenticated(value: boolean) {
     this.isAuthenticatedSubject.next(value);
   }
-  isTrentUser(): boolean {
-    const userRole = this.getUserRole();
-    return userRole === 'TrentUser';
-  }
-  isAdmin(): boolean {
-    const userRole = this.getUserRole();
-    return userRole === 'Admin';
-  }
   isAuthenticated(): boolean {
     const token = this.getToken();
     return !!token && !this.jwtHelper.isTokenExpired(token);
   }
-  isAuthorized(): boolean {
-    const token = this.getToken();
-    // Check if token is present, not expired, and meets your authorization criteria
-    return !!token && !this.jwtHelper.isTokenExpired(token) && this.meetsAuthorizationCriteria(token);
-  }
 
-  private meetsAuthorizationCriteria(token: string): boolean {
-    const decodedToken = this.jwtHelper.decodeToken(token);
-    return decodedToken?.role === 'Admin';
-  }
 }

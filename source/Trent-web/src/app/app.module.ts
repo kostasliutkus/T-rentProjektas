@@ -26,12 +26,17 @@ import { AccommodationListComponent } from './components/accommodation-list/acco
 import { RenterComponent,DeleteConfirmationDialogComponent } from './components/renter/renter.component';
 import { AddRenterComponent } from './components/add-renter/add-renter.component';
 import {MatDialogModule} from "@angular/material/dialog";
-import { OrderListComponent } from "./components/order-list/order-list.component";
 import {ApiOrderService} from "./services/api-order.service";
 import {OrderComponent } from './components/order/order.component';
 import {AddOrderComponent } from './components/add-order/add-order.component';
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
+import {DeleteConfirmationDialogOrderComponent, ProfileComponent} from './components/profile/profile.component';
+import { EditOrderComponent } from './components/edit-order/edit-order.component';
+import {
+  AccommodationComponent,
+  DeleteConfirmationDialogAccommodationComponent
+} from './components/accommodation/accommodation.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,9 +47,13 @@ import {MatNativeDateModule} from "@angular/material/core";
     RenterComponent,
     AddRenterComponent,
     DeleteConfirmationDialogComponent,
-    OrderListComponent,
     OrderComponent,
-    AddOrderComponent
+    AddOrderComponent,
+    ProfileComponent,
+    DeleteConfirmationDialogOrderComponent,
+    EditOrderComponent,
+    AccommodationComponent,
+    DeleteConfirmationDialogAccommodationComponent
   ],
   imports: [
     HttpClientModule,

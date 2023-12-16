@@ -47,11 +47,12 @@ export class AppComponent implements OnInit {
   navigateToLogin() {
     this.router.navigate(['/login']);
   }
-  navigateToAccommodationList() {
-    this.router.navigate(['/accommodation-list']);
-  }
+
   navigateToAddOrder() {
     this.router.navigate(['add-order']);
+  }
+  navigateToProfile(){
+    this.router.navigate(['profile']);
   }
   navigateToRegister() {
     this.router.navigate(['/register']);
