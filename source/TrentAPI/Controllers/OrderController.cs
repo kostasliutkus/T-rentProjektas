@@ -159,4 +159,19 @@ public class OrderController : ControllerBase
         await _orderRepo.DeleteOrderAsync(id,idR,idA);
         return NoContent();
     }
+    [HttpGet("ByUser", Name = "GetOrdersByUser")]
+    [Authorize(Roles = TrentRoles.TrentUser)]
+    public async Task<IActionResult> GetOrdersByUser()
+    {
+        try
+        {
+            var userId = User.FindFirstValue(JwtRegisteredClaimNames.Sub);
+            var orders = await _orderRepo.GetOrdersByUserAsync(userId);
+            return Ok(orders);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, "An error occurred while fetching orders.");
+        }
+    }
 }
