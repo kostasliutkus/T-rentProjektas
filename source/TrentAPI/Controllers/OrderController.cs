@@ -159,7 +159,7 @@ public class OrderController : ControllerBase
         await _orderRepo.DeleteOrderAsync(id,idR,idA);
         return NoContent();
     }
-    [HttpGet("ByUser", Name = "GetOrdersByUser")]
+    [HttpGet("api/GetOrdersByUser", Name = "GetOrdersByUser")]
     [Authorize(Roles = TrentRoles.TrentUser)]
     public async Task<IActionResult> GetOrdersByUser()
     {
