@@ -28,8 +28,10 @@ import { AddRenterComponent } from './components/add-renter/add-renter.component
 import {MatDialogModule} from "@angular/material/dialog";
 import { OrderListComponent } from "./components/order-list/order-list.component";
 import {ApiOrderService} from "./services/api-order.service";
-import { OrderComponent } from './components/order/order.component';
-import { AddOrderComponent } from './components/add-order/add-order.component';
+import {OrderComponent } from './components/order/order.component';
+import {AddOrderComponent } from './components/add-order/add-order.component';
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule} from "@angular/material/core";
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,24 +46,26 @@ import { AddOrderComponent } from './components/add-order/add-order.component';
     OrderComponent,
     AddOrderComponent
   ],
-    imports: [
-        HttpClientModule,
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        MatIconModule,
-        MatButtonModule,
-        MatToolbarModule,
-        MatFormFieldModule,
-        MatSelectModule,
-        MatInputModule,
-        ReactiveFormsModule,
-        MatSnackBarModule,
-        MatSidenavModule,
-        MatTableModule,
-        MatDialogModule,
-        FormsModule,
-    ],
+  imports: [
+    HttpClientModule,
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatIconModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatSnackBarModule,
+    MatSidenavModule,
+    MatTableModule,
+    MatDialogModule,
+    FormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+  ],
   providers: [ApiRenterService,ApiLoginService,ApiRegisterService,ApiOrderService],
   bootstrap: [AppComponent]
 })

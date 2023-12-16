@@ -50,6 +50,9 @@ export class AppComponent implements OnInit {
   navigateToAccommodationList() {
     this.router.navigate(['/accommodation-list']);
   }
+  navigateToAddOrder() {
+    this.router.navigate(['add-order']);
+  }
   navigateToRegister() {
     this.router.navigate(['/register']);
     this.rentersVisited=true;

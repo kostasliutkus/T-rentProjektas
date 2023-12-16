@@ -21,6 +21,7 @@ export class RenterComponent implements OnInit {
   renter!: Renter;
   isEditing: boolean = false;
   editForm!: FormGroup;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -31,6 +32,7 @@ export class RenterComponent implements OnInit {
     private snackBar: MatSnackBar
   ) {}
   ngOnInit() {
+
     this.route.paramMap.subscribe(params=>
     {
       const id = params.get('id');
@@ -114,6 +116,7 @@ export class RenterComponent implements OnInit {
       }
     );
   }
+
 }
 @Component({
   selector: 'app-delete-confirmation-dialog',
