@@ -166,6 +166,7 @@ public class OrderController : ControllerBase
         try
         {
             var userId = User.FindFirstValue(JwtRegisteredClaimNames.Sub);
+            Console.WriteLine(userId);
             var orders = await _orderRepo.GetOrdersByUserAsync(userId);
             return Ok(orders);
         }
