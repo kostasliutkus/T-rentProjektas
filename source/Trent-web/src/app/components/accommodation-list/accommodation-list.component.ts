@@ -12,6 +12,7 @@ import {TokenService} from "../../services/token.service";
 export class AccommodationListComponent implements OnInit{
   displayedColumns: string[] = ['location', 'instructions'];
   accommodations: Accommodation[] = [];
+  isAuthenticated: boolean = false;
   idR!: number;
   constructor(
     private apiAccommodationService: ApiAccommodationService,
@@ -21,6 +22,9 @@ export class AccommodationListComponent implements OnInit{
     ) {}
 
   ngOnInit(): void {
+    this.tokenService.isAuthenticated$.subscribe((isAuthenticated) => {
+      this.isAuthenticated = isAuthenticated;
+    });
     this.route.paramMap.subscribe(params=>
     {
       const id = params.get('idR');
@@ -40,5 +44,8 @@ export class AccommodationListComponent implements OnInit{
   }
   goToAccommodation(accommodation: Accommodation){
     this.router.navigate(['/accommodation',accommodation.renterID,accommodation.id]);
+  }
+  createAccommodation(){
+    this.router.navigate(['/create-accommodation',this.idR]);
   }
 }

@@ -9,6 +9,7 @@ import {AddOrderComponent} from "./components/add-order/add-order.component";
 import {ProfileComponent} from "./components/profile/profile.component";
 import {EditOrderComponent} from "./components/edit-order/edit-order.component";
 import {AccommodationComponent} from "./components/accommodation/accommodation.component";
+import {AddAccommodationComponent} from "./components/add-accommodation/add-accommodation.component";
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
@@ -18,7 +19,8 @@ const routes: Routes = [
   { path: 'add-order', component: AddOrderComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'edit-order/:id/:idR/:idA', component: EditOrderComponent },
-  { path: 'accommodation/:idR/:id', component: AccommodationComponent }
+  { path: 'accommodation/:idR/:id', component: AccommodationComponent },
+  { path: 'create-accommodation/:idR', component: AddAccommodationComponent }
 ];
 
 @NgModule({

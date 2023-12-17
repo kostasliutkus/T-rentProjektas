@@ -51,17 +51,6 @@ export class TokenService {
       return null;
     }
   }
-  getDecodedUserId(): string {
-    const token = this.getToken();
-    if (token) {
-      const decodedToken = this.jwtHelper.decodeToken(token);
-      return decodedToken.sub;
-
-    }else {
-      console.error('Token is null');
-      return '';
-    }
-  }
   setAccessToken(token: string): void {
     this.accessToken = token;
   }

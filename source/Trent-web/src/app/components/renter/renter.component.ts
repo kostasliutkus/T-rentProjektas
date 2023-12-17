@@ -58,7 +58,9 @@ export class RenterComponent implements OnInit {
         this.firstName=this.editedRenter.firstName;
         this.lastName=this.editedRenter.lastName;
         const currentUserId = this.tokenService.getUserId();
-        this.isAuthorized = renter.userId == currentUserId;
+        const role = this.tokenService.getUserRole();
+        if(renter.userId == currentUserId || role=='admin')
+          this.isAuthorized = true;
         this.editForm.patchValue({
           firstName: renter.firstName,
           lastName: renter.lastName,

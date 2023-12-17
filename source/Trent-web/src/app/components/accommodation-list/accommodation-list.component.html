@@ -1,3 +1,8 @@
+<div class="buttons-div" *ngIf="isAuthenticated" >
+  <div class="button-container">
+    <button mat-raised-button color="primary" class=""  (click)="createAccommodation()">Create new</button><br><br>
+  </div>
+</div>
 <table mat-table [dataSource]="accommodations" class="mat-table-accommodations">
 
   <ng-container matColumnDef="location">

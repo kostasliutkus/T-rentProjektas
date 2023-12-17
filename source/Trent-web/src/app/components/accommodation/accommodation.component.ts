@@ -56,8 +56,11 @@ export class AccommodationComponent implements OnInit{
         this.accommodation = accommodation;
         this.editedAccommodation = { ...accommodation };
         this.location=this.editedAccommodation.location;
+
         const currentUserId = this.tokenService.getUserId();
-        this.isAuthorized = accommodation.userId == currentUserId;
+        const role = this.tokenService.getUserRole();
+        if(accommodation.userId == currentUserId || role=='admin')
+          this.isAuthorized = true;
         console.log(accommodation.userId)
         this.editForm.patchValue({
           location: accommodation.location,

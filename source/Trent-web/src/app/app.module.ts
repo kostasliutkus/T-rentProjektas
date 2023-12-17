@@ -37,6 +37,7 @@ import {
   AccommodationComponent,
   DeleteConfirmationDialogAccommodationComponent
 } from './components/accommodation/accommodation.component';
+import { AddAccommodationComponent } from './components/add-accommodation/add-accommodation.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,7 +54,8 @@ import {
     DeleteConfirmationDialogOrderComponent,
     EditOrderComponent,
     AccommodationComponent,
-    DeleteConfirmationDialogAccommodationComponent
+    DeleteConfirmationDialogAccommodationComponent,
+    AddAccommodationComponent
   ],
   imports: [
     HttpClientModule,
