@@ -1,0 +1,27 @@
+<div class="accommodation-container" >
+  <div class="accommodation-header-container">
+    <h4 class="accommodation-header">Accommodation details</h4>
+  </div>
+  <form [formGroup]="accommodationForm" class="form-container">
+
+    <mat-form-field class="form-field">
+      <mat-label>Location</mat-label>
+      <input matInput formControlName="location" required>
+    </mat-form-field>
+
+    <mat-form-field class="form-field">
+      <mat-label>Instructions</mat-label>
+      <input matInput formControlName="instructions" required>
+    </mat-form-field>
+
+    <mat-form-field class="form-field">
+      <mat-label>Renter Organization</mat-label>
+      <input matInput [value]="renter?.organization" readonly>
+    </mat-form-field>
+    <input type="hidden" formControlName="renterID">
+    <br>
+    <div class="button-container">
+      <button mat-raised-button color="primary" class="add-button" (click)="addAccommodation()">Create</button><br><br>
+    </div>
+  </form>
+</div>

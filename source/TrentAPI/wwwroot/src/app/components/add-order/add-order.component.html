@@ -1,0 +1,58 @@
+<div class="order-container" >
+  <div class="order-header-container">
+    <h4 class="order-header">Order details</h4>
+  </div>
+  <form [formGroup]="orderForm" class="form-container">
+<!--    <mat-form-field class="form-field">-->
+<!--      <mat-label>Lease Start Date</mat-label>-->
+<!--      <input matInput formControlName="leaseStartDate" required>-->
+<!--    </mat-form-field>-->
+    <mat-form-field class="form-field">
+      <mat-label>Lease Start date</mat-label>
+      <input matInput formControlName="leaseStartDate" [matDatepicker]="picker1" [min]="tomorrow" required>
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+
+<!--    <mat-form-field class="form-field">-->
+<!--      <mat-label>Lease End Date</mat-label>-->
+<!--      <input matInput formControlName="leaseEndDate" required>-->
+<!--    </mat-form-field>-->
+
+    <mat-form-field class="form-field">
+      <mat-label>Lease End date</mat-label>
+      <input matInput formControlName="leaseEndDate" [matDatepicker]="picker2" required [min]="endDate">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="form-field">
+      <mat-label>Renter</mat-label>
+      <mat-select formControlName="renterID" required (selectionChange)="onRenterSelected($event.value)">
+        <mat-option *ngFor="let renter of renters" [value]="renter.id">
+          {{renter.firstName + ' ' + renter.organization}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="form-field" *ngIf="showAccommodations">
+      <mat-label>Accommodation</mat-label>
+      <mat-select formControlName="accommodationID" required>
+        <mat-option *ngFor="let accommodation of accommodations" [value]="accommodation.id">
+          {{accommodation.location}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="form-field">
+      <mat-label>Price</mat-label>
+      <input matInput formControlName="price" required>
+    </mat-form-field>
+    <br>
+    <div class="button-container">
+      <button mat-raised-button color="primary" class="add-button" (click)="addOrder()">Create</button><br><br>
+    </div>
+  </form>
+</div>

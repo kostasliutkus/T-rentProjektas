@@ -1,0 +1,10 @@
+.buttons-div{
+  display:flex;
+  justify-content: end;
+  padding-right:15px;
+ //padding-top: 10px;
+}
+.mat-table-renters tr:hover {
+  background-color: darkgrey;
+  cursor: pointer;
+}

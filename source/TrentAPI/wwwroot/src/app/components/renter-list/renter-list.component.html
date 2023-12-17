@@ -1,0 +1,48 @@
+<div class="buttons-div" *ngIf="isAuthenticated" >
+  <div class="button-container">
+    <button mat-raised-button color="primary" class=""  (click)="createRenter()">Create new</button><br><br>
+  </div>
+</div>
+<table mat-table [dataSource]="renters" class="mat-table-renters">
+
+  <ng-container matColumnDef="firstName">
+    <th mat-header-cell *matHeaderCellDef> First Name </th>
+    <td mat-cell *matCellDef="let renter"> {{renter.firstName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="lastName">
+    <th mat-header-cell *matHeaderCellDef> Last Name </th>
+    <td mat-cell *matCellDef="let renter"> {{renter.lastName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="organization">
+    <th mat-header-cell *matHeaderCellDef> Organization </th>
+    <td mat-cell *matCellDef="let renter"> {{renter.organization}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="age">
+    <th mat-header-cell *matHeaderCellDef> Age </th>
+    <td mat-cell *matCellDef="let renter"> {{renter.age}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef> Email </th>
+    <td mat-cell *matCellDef="let renter"> {{renter.email}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="phone">
+    <th mat-header-cell *matHeaderCellDef> Phone </th>
+    <td mat-cell *matCellDef="let renter"> {{renter.phone}}  </td>
+  </ng-container>
+
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> Id </th>
+    <td mat-cell *matCellDef="let renter"> {{renter.id}}  </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row  (click)="goToRenter(renter)" *matRowDef="let renter; columns: displayedColumns;"></tr>
+  <br>
+
+</table>
+
