@@ -6,23 +6,36 @@ WORKDIR /source
 COPY source/TrentAPI/*.csproj .
 RUN dotnet restore -r linux-musl-x64 /p:PublishReadyToRun=true
 
-# copy everything else and build app
+# copy everything else and build the API
 COPY source/TrentAPI/. .
-RUN dotnet publish -c Release -o /app -r linux-musl-x64 --self-contained true --no-restore /p:PublishReadyToRun=true /p:PublishSingleFile=true
+RUN dotnet publish -c Release -o /app/api -r linux-musl-x64 --self-contained true --no-restore /p:PublishReadyToRun=true /p:PublishSingleFile=true
+
+# switch back to the source directory
+WORKDIR /source
+
+# copy the Angular project
+COPY source/Trent-web /app/web
+
+# install Node.js and npm
+RUN apk add --no-cache nodejs npm
+
+# build the Angular project
+WORKDIR /app/web
+RUN npm install
+RUN npm run build
 
 # final stage/image
 FROM mcr.microsoft.com/dotnet/runtime-deps:7.0-alpine-amd64
 WORKDIR /app
-COPY --from=build /app .
-RUN ls /app
-ENTRYPOINT ["./TRentAPI"]
 
-# See: https://github.com/dotnet/announcements/issues/20
-# Uncomment to enable globalization APIs (or delete)
-ENV \
-     DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false \
-     LC_ALL=en_US.UTF-8 \
-     LANG=en_US.UTF-8
- RUN apk add --no-cache \
-     icu-data-full \
-     icu-libs
+# copy the API from the build stage
+COPY --from=build /app/api .
+
+# copy the Angular project from the build stage
+COPY --from=build /app/web/dist /app/web
+
+# set up web server to serve Angular app
+RUN apk add --no-cache nginx
+COPY nginx.conf /etc/nginx/nginx.conf
+
+ENTRYPOINT ["./TRentAPI"]
