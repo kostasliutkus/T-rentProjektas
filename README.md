@@ -58,10 +58,54 @@ Administratorius galės valdyti visą sistemą t. y. pridėti naujus nuomotojus 
    Šiame skyriuje bus aprašomi API metodai, nurodoma url kuriuo juos galima pasiekti,
    kokių formatu priema bei gražina duomenis, taip pat galimos klaidos. Jei metodas priema duomenis
    jų struktūra irgi nurodyta.
-   ## GET Renter 
+
+   Visi metodai priema duomenis ir gražina juos JSON formatu
+   ## GET ALl Renters 
    Gražina visų Renter objektų sąrašą
-| API metodas | Header 2 | Header 3 |
-|----------|----------|----------|
-| Row 1, Col 1 | Row 1, Col 2 | Row 1, Col 3 |
-| Row 2, Col 1 | Row 2, Col 2 | Row 2, Col 3 |
-| Row 3, Col 1 | Row 3, Col 2 | Row 3, Col 3 |
+   ### Resurso URL
+   `https://sea-turtle-app-64g26.ondigitalocean.app/api/Renters`
+Ar reikalinga autorizacija? -  Ne
+| Parametrai | Pavyzdys | 
+|----------|----------|
+| Row 1, Col 1 | Row 1, Col 2 |
+| Row 2, Col 1 | Row 2, Col 2 |
+| Row 3, Col 1 | Row 3, Col 2 |
+#### Gražinamo rezultato pavyzdys
+```json
+[
+    {
+        "firstName": "Dukey",
+        "lastName": "Lacknor",
+        "organization": "Talane",
+        "age": 22,
+        "id": 1,
+        "email": "dlacknor0@yellowbook.com",
+        "phone": "+62 752 674 0756",
+        "userId": "f7f10684-c5c5-481d-99ba-bf3346ee1a00",
+        "user": null
+    },
+    {
+        "firstName": "testinis",
+        "lastName": "Lacknor",
+        "organization": "Talane",
+        "age": 22,
+        "id": 2,
+        "email": "dlacknor0@yellowbook.com",
+        "phone": "+62 752 674 0756",
+        "userId": "f7f10684-c5c5-481d-99ba-bf3346ee1a00",
+        "user": null
+    }
+   ]
+```
+
+## GET Renter 
+   Gražina visų Renter objektų sąrašą
+   ### Resurso URL
+   `https://sea-turtle-app-64g26.ondigitalocean.app/api/Renters`
+Ar reikalinga autorizacija? -  Ne
+#### Gražinamo rezultato pavyzdys
+| Parametrai | Pavyzdys | 
+|----------|----------|
+| Row 1, Col 1 | Row 1, Col 2 |
+| Row 2, Col 1 | Row 2, Col 2 |
+| Row 3, Col 1 | Row 3, Col 2 |
