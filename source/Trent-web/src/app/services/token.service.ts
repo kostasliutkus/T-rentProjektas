@@ -59,6 +59,7 @@ export class TokenService {
   }
   clearAccessToken(): void {
     this.accessToken = null;
+    localStorage.removeItem(this.accessTokenKey);
   }
   setAuthenticated(value: boolean) {
     this.isAuthenticatedSubject.next(value);
