@@ -1,37 +1,44 @@
-# Build stage
-FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+# Build Angular app
+FROM node:10 as build-angular
 WORKDIR /app
 
-# Copy the source code for the C# backend
-COPY ./source/trentAPI ./trentAPI
+# Copy only the necessary files for installing dependencies
+COPY source/Trent-web/package.json .
+COPY source/Trent-web/package-lock.json .
 
-# Build the backend
-WORKDIR /app/trentAPI
-RUN dotnet publish -c Release -o /app/out
-
-# Angular build stage
-FROM node:10.1 AS client
-WORKDIR /client
-
-# Copy Angular app files
-COPY ./source/trent-web .
-
-# Install dependencies and build
+# Install Angular dependencies
 RUN npm install
+
+# Copy the entire Angular project
+COPY source/Trent-web .
+
+# Build the Angular app
 RUN npm run build
 
-# Runtime stage
-FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS runtime
+# Build API project
+FROM mcr.microsoft.com/dotnet/sdk:7.0-alpine AS build-api
+WORKDIR /source
+
+# Copy csproj and restore as distinct layers
+COPY source/TrentAPI/*.csproj .
+RUN dotnet restore -r linux-musl-x64 /p:PublishReadyToRun=true
+
+# Copy everything else and build the API
+COPY source/TrentAPI/. .
+RUN dotnet publish -c Release -o /app/api -r linux-musl-x64 --self-contained true --no-restore /p:PublishReadyToRun=true /p:PublishSingleFile=true
+
+# Final image
+FROM mcr.microsoft.com/dotnet/runtime-deps:7.0-alpine-amd64
 WORKDIR /app
 
-# Copy the backend binaries from the build stage
-COPY --from=build /app/out .
+# Copy the API from the build stage
+COPY --from=build-api /app/api .
 
-# Copy the built Angular app to the container
-COPY --from=client /client/dist/trent-web ./wwwroot
+# Copy the Angular build files
+COPY --from=build-angular /app/dist /app/wwwroot
 
-# Expose the port that your combined app will run on
-EXPOSE 80
+# Set up web server to serve Angular app
+RUN apk add --no-cache nginx
+COPY nginx.conf /etc/nginx/nginx.conf
 
-# Command to run the combined app
-ENTRYPOINT ["dotnet", "trentAPI.dll"]
+ENTRYPOINT ["./TRentAPI"]
