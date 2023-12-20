@@ -37,6 +37,5 @@ COPY --from=build /app/web/dist /app/web
 # Set up web server to serve Angular app
 RUN apk add --no-cache nginx
 COPY nginx.conf /etc/nginx/nginx.conf
-COPY nginx-app.conf /etc/nginx/conf.d/default.conf
 
 ENTRYPOINT ["./TRentAPI"]
