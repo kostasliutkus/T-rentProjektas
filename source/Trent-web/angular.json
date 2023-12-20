@@ -20,6 +20,7 @@
             "outputPath": "dist/trent-web",
             "index": "src/index.html",
             "main": "src/main.ts",
+            "baseHref": "/",
             "polyfills": [
               "zone.js"
             ],

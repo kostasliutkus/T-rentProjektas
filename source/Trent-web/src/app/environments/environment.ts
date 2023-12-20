@@ -1,4 +1,4 @@
 export const environment ={
-  prodcution: false,
+  production: false,
   apiurl: "https://sea-turtle-app-64g26.ondigitalocean.app/api/"
 };
