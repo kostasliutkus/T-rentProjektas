@@ -16,6 +16,9 @@ WORKDIR /source
 # copy the Angular project
 COPY source/Trent-web /app/web
 
+# install Node.js and npm
+RUN apk add --no-cache nodejs npm
+
 # build the Angular project
 WORKDIR /app/web
 RUN npm install
