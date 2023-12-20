@@ -2,18 +2,19 @@
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /app
 
-# Copy the source code
-COPY ./source .
+# Copy the source code for the C# backend
+COPY ./source/TrentAPI ./TrentAPI
 
 # Build the backend
-RUN dotnet publish -c Release -o out
+WORKDIR /app/TrentAPI
+RUN dotnet publish -c Release -o /app/out
 
 # Angular build stage
 FROM node:14 AS client
 WORKDIR /client
 
 # Copy Angular app files
-COPY ./source/trent-web .
+COPY ./source/Trent-web .
 
 # Install dependencies and build
 RUN npm install
@@ -27,7 +28,7 @@ WORKDIR /app
 COPY --from=build /app/out .
 
 # Copy the built Angular app to the container
-COPY --from=client /client/dist/trent-web ./wwwroot
+COPY --from=client /client/dist/Trent-web ./wwwroot
 
 # Expose the port that your combined app will run on
 EXPOSE 80
