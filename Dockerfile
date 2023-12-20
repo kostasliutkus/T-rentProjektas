@@ -1,5 +1,5 @@
 # Build Angular app
-FROM node:10 as build-angular
+FROM node:16 as build-angular
 WORKDIR /app
 
 # Copy only the necessary files for installing dependencies
