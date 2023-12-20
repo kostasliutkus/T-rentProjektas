@@ -783,3 +783,5 @@ Apsigalvojus galima grįšti į būsto valdymo langą paspaudus Cancel, jokie pa
 Šalinimo mygtukas atidaro šalinimo patvirtinmo langą, kuriame galima patvirtinti šalinimą spaudžiant mygtuką delete arba atšaukti jį paspaudus Cancel
 
 ![Delete Accommodation](images/AccommodationConfirmDelete.png)
+## Išvados
+Projekto įkėlimui į saityną angl. (host), buvo pasirinkta Google Cloud technologija, bet vėliau pakeista į Digital Ocean, kadangi iš tiesų yra ganėtinai sudėtinga kelti projektą į saityną be jokios pradinės patirtied, tad buvo pakeista technologija į dėstytojo pavyzdį turinčią. Projektą įgyvendinti pavyko sėkmingai visos funkcijos, kurios buvo užsibrėžtos, kad veiktu yra ir veikia, korektiškai. Pati vizija projekto šiek tiek pasikeitė tačiau bendra įdėja išliko. Viena sunkesnių dalių buvo vartotojo sąsajos angl. "frontend" su Angular karkasų įgyvendinimas, manau, kad minimali patirtis kurią jau tūrėjau dirbant su šia technologija labai padėjo įgyvendinti projektą ir vientisą išvaizdą.
