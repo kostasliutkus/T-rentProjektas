@@ -643,12 +643,15 @@ kuris laiko tuos pačius mygtukus
 ### 6.2 Renters objektų sąrašo langas
 Čia matomi visi visų vartotojų sukurti Renter tipo objektai nuomininkai.
 Ant kiekvienos eilutės galima spustelti ir nukeliauti į detalesnę nuomininko kortelę
+
 ![Renter list](images/renters.png)
 
 ### 6.3 Nuomininko langas
+
 ![Renter](images/Renter.png)
 Neregistruotas vartotojas mato tik View Accommodations mygtuką. Paspaudus šį mygtuką bus atidaromi
 nuomininko būstai.
+
 ![Accommodations](images/accommodations.png)
 
 ### 6.4 Registracijos langas
@@ -662,14 +665,121 @@ Taip pat matome mygtuką
 - Register - užpildžius laukus galima prisiregistruoti paspaudus šį mygtuką, jei pavyko registraciją bus atidarytas prisijungimo langas
 Ir nuorodą
 - Already Registerd? - atidaro prisijungimo langą
+
 ![Register](images/register.png)
 ### 6.5 Prisijungimo langas
-Atsidarius prisijungimo langą matome du laukus:
+#### Atsidarius prisijungimo langą matome du laukus:
 - Username - čia vedame registracijos metu išsaugotą prisijungimo vardą
 - Password - čia vedame registracijos metu išsaugotą slaptažodį
    - slaptažodis taip pat turi akutę kurią paspaudus įjungiamas matomumas slaptažodžio
-Taip pat matome mygtuką
+#### Matome mygtuką
 - Login - užpildžius laukus galima prisijungti paspaudus šį mygtuką, jei pavyko prisijungti bus atidarytas pagrindinis langas
-Ir nuorodą
+#### Matome nuorodą 
 - Create an Account - atidaro registracijos langą
+#### Taip pat prisijungus atsiranda trys papildomi bei dingsta du mygtukai (Taip pat šie pakitimai galioja ir paslėptam hamburgerio meniu)
+##### Papildomi mygtukai:
+- Profilis - atidaro profilį
+- New Order - atidaro užsakymo sukūrimo langą
+- Logout - atjungia vartotoją nuo sistemos, jis pakeičia Login ir Register mygtukus
+##### Nematomi mygtukai
+- Login mygtukas
+- Register mygtukas
+
+
 ![Login](images/login.png)
+### 6.6 Profilio langas
+Profilio lange matoma:
+- Prisijungimo vardas
+- Rolė
+- Užsakymų kiekis
+- Užsakymų sąrašas
+   - Užsakymo naikinimo mygtukas
+   - Užsakymo redagavimo mygtukas
+
+![Profile](images/profile.png)
+#### Užsakymo naikinimo patvirtinimo langas
+![Delete order](images/orderDelete.png)
+
+### 6.7 Užsakymo redagavimo langas
+Atsidarius užsakymo redagavimo langą galima koreguoti viską išskyrus sukūrimo datą
+- Paspaudus Cancel mygtuką bus atšaukiami ir neišsaugoti pakeitimai
+- Paspaudus Save mygtuką bus išsaugomi pakeitimai ir matomi iš profilio lango
+
+![Edit Order](images/OrderEdit.png)
+
+### 6.8 Užsakymo sukūrimo langas
+Atsidarius užsakymo sukūrimo langą galima iš pagrindinės juostos mygutko New Order
+Matomi įvesties laukai:
+- Lease Start date
+- Lease End date
+- Renter
+- Price
+
+![New Order](images/OrderCreate.png)
+
+Pasirinkus Renter iš jau sukurtų Renter objektų, tampa matomas papildomas laukas Accommodation "būstų". Norint sukurti užsakymą reikės užpildyti ir šį lauką iš pateiktų variantų
+Užpildžius visus laukus ir paspaudus Create mygtuką sukuriamas įrašas ir jis tampa matomas iš profilio lango
+
+![New Order2](images/OrderCreate2.png)
+
+### 6.8 Renters langas prisijungus
+Matomas papildomas mygtukas Create New
+Paspaudus minėtą mygtuką bus atidarytas modalinis langas kurim bus galima sukurti naują nuomininką
+
+![Renters when Authorized](images/RenterList.png)
+
+Atidarytame lange matome šiuos laukus:
+- First Name - vardas
+- Last Name - pavardė
+- Organization - organizacija
+- Age - Amžius, mažiausia priimama reikšmė yra 18 metų
+- Email - el. paštas
+- Phone - Telefono numeris
+
+![Create Renter](images/CreateRenter.png)
+
+### 6.9 Renter langas prisijungus
+Kai esame Renter lange ir esame autorizuotas vartotojas t.y. mes žiūrime savo sukurtą objektą, matome du papildomus laukus:
+
+- Edit - Redaguoti
+- Delete - Šalinti
+
+![Renter when authorized](images/authorizedRenter.png)
+
+#### Paspaudus šalinti yra atidaromas šalinimo patvirtinimo langas:
+
+Šiame lange arba galima pasirinkti patvirtinti šalinimą arba jį atšaukti, atitinkamai paspaudus Delte arba Cancel mygtukus
+
+![Delete Renter](images/deleteRenter.png)
+
+#### Paspaudus Edit yra atidaromas redagavimo langas:
+Šiame lange galima redaguoti visus nuomininko laukus ir atitinkamai paspaudus Save pakeitimai bus išsaugoti ir Cancel bus atšaukiami
+
+![Edit Renter](images/EditRenter.png)
+
+### 6.10 Accommodation list langas prisijungus
+Kai esame prisijunge prie sistemos matome Create New mygtuką, bei Būstus, kurie yra priskirti nuomininkui per, kurį atėjome iki šio lauko
+
+![Accommodations](images/accommodationsAuthorized.png)
+
+#### Paspaudus Create New atsidaro pridėjimo langas
+Čia galime sukurti naują būstą užpildydami Location ir Instructions laukus
+Yra trečias laukas Renter Organization tačiau jis yra užpildomas automatiškai, pagal nuomininką, kuriame esame šiuo metu.
+Paspaudus mygtuką Create bus sukuriamas naujas būstas ir atidaromas būstų sąrašo langas.
+
+![Create Accommodation](images/AccommodationCreate.png)
+
+#### Paspaudus ant norimo būsto eilutės atsidaro valdymo langas
+
+###### Čia yra du mygtukai kurie leidžia arba redaguoti arba šalinti būstą
+
+![Manage Accommodations](images/ManageAccommodation.png)
+
+Redagavimo lange galima pakeisti Location ir Instructions laukų vertes ir paspaudus Save mygtuką jas išsaugoti
+Apsigalvojus galima grįšti į būsto valdymo langą paspaudus Cancel, jokie pakeitimai nebus išsaugoti
+
+![Edit Accommodation](images/AccommodationEdit.png)
+
+Šalinimo mygtukas atidaro šalinimo patvirtinmo langą, kuriame galima patvirtinti šalinimą spaudžiant mygtuką delete arba atšaukti jį paspaudus Cancel
+
+![Delete Accommodation](images/AccommodationConfirmDelete.png)

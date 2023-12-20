@@ -123,7 +123,7 @@ export class AccommodationComponent implements OnInit{
 @Component({
   selector: 'app-delete-confirmation-dialog-accommodation',
   template: `
-    <h1 mat-dialog-title>Delete Renter</h1>
+    <h1 mat-dialog-title>Delete Accommodation</h1>
     <div mat-dialog-content>
       <p>Are you sure you want to delete {{ data.location }}?</p>
     </div>
