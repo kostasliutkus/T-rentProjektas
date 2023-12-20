@@ -360,12 +360,6 @@ Administratorius galės valdyti visą sistemą t. y. pridėti naujus nuomotojus 
    - 401 (Unauthorized) - vartotojas nėra prisijungęs
    - 204 (No Content) - Sėkmingai pašalintas objektas
 
-   //////////////////////////////////////
-   /////////////////////////////////////
-   ////////////////////////////////////
-   ///////////////////////////////////
-   //////////////////////////////////
-
    ## Get Orders 
    Gražina visų Orders objektų sąrašą, kurie priklauso Accommodation objektui pagal jo id (idA) ir Renter objektui pagal jo id (idR)
    ### Resurso URL
@@ -548,7 +542,6 @@ Administratorius galės valdyti visą sistemą t. y. pridėti naujus nuomotojus 
    - 401 (Unauthorized) - vartotojas nėra prisijungęs arba jwt token yra klaidingas
    - 200 (OK) - Sėkmingai gražintas vartotojo sukurtų Order objektų sąrašas
 
-///////////////
    ## Register 
    Vartotojo sukūrimas, registracija
    ### Resurso URL
@@ -630,4 +623,10 @@ Administratorius galės valdyti visą sistemą t. y. pridėti naujus nuomotojus 
    #### Gražinami HTTP kodai
    - 200 (Ok) - Pavyko prisijungti
    - 422 (Unprocessable Entity) - klaidingas JWT Bearer token
+
+
    ## 6. Vartotojo sąsaja
+   Sistema sudaryti iš dviejų dalių ką tik apžvelgėme API galinę angl."backend" dalį (C# .net Framework).
+   Toliau pateikta vartotojo sąsajos angl. "frontend" (Angular) apžvalga.
+   ### 6.1 Pradinis sistemos puslapis
+   ![Alt text](image.png)
