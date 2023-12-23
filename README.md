@@ -97,7 +97,7 @@ Gražina visų Renter objektų sąrašą
       "userId": "f7f10684-c5c5-481d-99ba-bf3346ee1a00",
       "user": null
    }
-   ]
+]
 ```
 
 ### GET Renter 
@@ -698,7 +698,7 @@ Profilio lange matoma:
 
 ![Profile](images/profile.png)
 #### Užsakymo naikinimo patvirtinimo langas
-![Delete order](images/orderDelete.png)
+![Delete order](images/OrderDelete.png)
 
 ### 6.7 Užsakymo redagavimo langas
 Atsidarius užsakymo redagavimo langą galima koreguoti viską išskyrus sukūrimo datą
